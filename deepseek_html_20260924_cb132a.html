@@ -1,0 +1,1826 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>STYLISTLK — Fashion Stylist • Sri Lanka</title>
+  <!-- Fonts: high-contrast serif + clean sans-serif -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    /* ---------- RESET & BASE ---------- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: #0a0a0a;
+      color: #f5f3ef;
+      font-family: 'Inter', 'Helvetica Neue', sans-serif;
+      font-weight: 300;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* ---------- UTILITY ---------- */
+    .container {
+      width: 100%;
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 5vw;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      border: 0;
+    }
+
+    /* ---------- TYPOGRAPHY ---------- */
+    .serif {
+      font-family: 'Playfair Display', 'Cormorant Garamond', 'Bodoni MT', serif;
+      font-weight: 400;
+      letter-spacing: -0.02em;
+    }
+
+    .label {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #b8b2a8;
+    }
+
+    .label--gold {
+      color: #c9b28b;
+    }
+
+    /* ---------- SCROLLBAR ---------- */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0a0a0a;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #2a2a2a;
+    }
+
+    /* ---------- NAVIGATION ---------- */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      padding: 1.5rem 0;
+      transition: background 0.45s ease, backdrop-filter 0.45s ease,
+        border-color 0.45s ease;
+      border-bottom: 1px solid transparent;
+    }
+
+    .nav--scrolled {
+      background: rgba(10, 10, 10, 0.85);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .nav__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 5vw;
+    }
+
+    .nav__logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      color: #f5f3ef;
+    }
+
+    .nav__links {
+      display: flex;
+      gap: 2.6rem;
+      align-items: center;
+    }
+
+    .nav__links a {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #f5f3ef;
+      opacity: 0.8;
+      transition: opacity 0.25s ease;
+    }
+
+    .nav__links a:hover {
+      opacity: 1;
+    }
+
+    .nav__cta {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      padding: 0.7rem 1.4rem;
+      transition: background 0.3s ease, border-color 0.3s ease;
+    }
+
+    .nav__cta:hover {
+      background: #f5f3ef;
+      color: #0a0a0a;
+      border-color: #f5f3ef;
+    }
+
+    .nav__hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+
+    .nav__hamburger span {
+      display: block;
+      width: 24px;
+      height: 1.5px;
+      background: #f5f3ef;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .nav__hamburger.active span:nth-child(1) {
+      transform: translateY(6.5px) rotate(45deg);
+    }
+    .nav__hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+    .nav__hamburger.active span:nth-child(3) {
+      transform: translateY(-6.5px) rotate(-45deg);
+    }
+
+    /* Mobile menu */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background: rgba(10, 10, 10, 0.97);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      z-index: 999;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2.2rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+
+    .mobile-menu.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .mobile-menu a {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      color: #f5f3ef;
+      letter-spacing: 0.04em;
+    }
+
+    .mobile-menu .nav__cta {
+      font-size: 0.8rem;
+      margin-top: 1rem;
+    }
+
+    /* ---------- HERO ---------- */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      overflow: hidden;
+      background: #0a0a0a;
+    }
+
+    .hero__bg {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+    }
+
+    .hero__bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 25%;
+      filter: brightness(0.7) contrast(1.05);
+      animation: heroReveal 1.8s ease-out forwards;
+      opacity: 0;
+      transform: scale(1.06);
+    }
+
+    @keyframes heroReveal {
+      0% {
+        opacity: 0;
+        transform: scale(1.06);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .hero__overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to right,
+        rgba(10, 10, 10, 0.75) 0%,
+        rgba(10, 10, 10, 0.35) 50%,
+        rgba(10, 10, 10, 0.6) 100%
+      );
+      z-index: 2;
+    }
+
+    .hero__content {
+      position: relative;
+      z-index: 3;
+      padding: 0 5vw;
+      max-width: 900px;
+      width: 100%;
+      margin-top: 4rem;
+    }
+
+    .hero__label {
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeUp 1s ease-out 0.4s forwards;
+    }
+
+    .hero__title {
+      font-size: clamp(3rem, 8vw, 6.5rem);
+      line-height: 1.05;
+      font-weight: 400;
+      color: #f5f3ef;
+      margin-bottom: 1.6rem;
+      letter-spacing: -0.03em;
+    }
+
+    .hero__title span {
+      display: block;
+      opacity: 0;
+      animation: fadeUp 1s ease-out forwards;
+    }
+
+    .hero__title span:nth-child(1) {
+      animation-delay: 0.6s;
+    }
+    .hero__title span:nth-child(2) {
+      animation-delay: 0.75s;
+    }
+    .hero__title span:nth-child(3) {
+      animation-delay: 0.9s;
+    }
+
+    .hero__desc {
+      font-size: 1rem;
+      font-weight: 300;
+      color: rgba(245, 243, 239, 0.75);
+      max-width: 480px;
+      line-height: 1.7;
+      margin-bottom: 2.4rem;
+      opacity: 0;
+      animation: fadeUp 1s ease-out 1.05s forwards;
+    }
+
+    .hero__actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 1s ease-out 1.2s forwards;
+    }
+
+    .btn {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      padding: 0.9rem 2rem;
+      border: 1px solid rgba(245, 243, 239, 0.5);
+      background: transparent;
+      color: #f5f3ef;
+      cursor: pointer;
+      transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .btn:hover {
+      background: #f5f3ef;
+      color: #0a0a0a;
+      border-color: #f5f3ef;
+    }
+
+    .btn--solid {
+      background: #f5f3ef;
+      color: #0a0a0a;
+      border-color: #f5f3ef;
+    }
+
+    .btn--solid:hover {
+      background: transparent;
+      color: #f5f3ef;
+    }
+
+    .hero__scroll {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 5vw;
+      z-index: 3;
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(245, 243, 239, 0.55);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      opacity: 0;
+      animation: fadeUp 1s ease-out 1.5s forwards;
+    }
+
+    .hero__scroll span {
+      animation: bounceDown 2s ease-in-out infinite;
+    }
+
+    @keyframes bounceDown {
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(4px);
+      }
+    }
+
+    @keyframes fadeUp {
+      0% {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ---------- SECTION SPACING ---------- */
+    section {
+      padding: 8rem 0;
+    }
+
+    @media (max-width: 768px) {
+      section {
+        padding: 5rem 0;
+      }
+    }
+
+    /* ---------- INTRO ---------- */
+    .intro {
+      background: #0a0a0a;
+    }
+
+    .intro__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .intro__left .label {
+      margin-bottom: 1.5rem;
+    }
+
+    .intro__headline {
+      font-size: clamp(2.4rem, 4.5vw, 4rem);
+      line-height: 1.15;
+      color: #ede9e2;
+    }
+
+    .intro__right {
+      padding-top: 3.5rem;
+    }
+
+    .intro__right p {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: rgba(245, 243, 239, 0.7);
+      margin-bottom: 1.5rem;
+      max-width: 480px;
+    }
+
+    .intro__right p:last-child {
+      color: rgba(245, 243, 239, 0.55);
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 900px) {
+      .intro__grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+      .intro__right {
+        padding-top: 0;
+      }
+    }
+
+    /* ---------- SERVICES ---------- */
+    .services {
+      background: #0a0a0a;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .services__header {
+      margin-bottom: 4rem;
+    }
+
+    .services__header .label {
+      margin-bottom: 1rem;
+    }
+
+    .services__header h2 {
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      line-height: 1.1;
+      color: #ede9e2;
+    }
+
+    .services__list {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .service-item {
+      display: grid;
+      grid-template-columns: 80px 1fr 1fr auto;
+      gap: 2rem;
+      align-items: center;
+      padding: 2rem 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      transition: background 0.3s ease, padding-left 0.3s ease;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .service-item:last-child {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .service-item:hover {
+      background: rgba(255, 255, 255, 0.02);
+      padding-left: 1rem;
+    }
+
+    .service-item__num {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      color: #c9b28b;
+      font-weight: 400;
+    }
+
+    .service-item__title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      font-weight: 400;
+      color: #ede9e2;
+      letter-spacing: -0.01em;
+    }
+
+    .service-item__desc {
+      font-size: 0.9rem;
+      color: rgba(245, 243, 239, 0.55);
+      line-height: 1.6;
+      max-width: 420px;
+    }
+
+    .service-item__arrow {
+      font-size: 1.2rem;
+      color: rgba(245, 243, 239, 0.4);
+      transition: transform 0.3s ease, color 0.3s ease;
+    }
+
+    .service-item:hover .service-item__arrow {
+      transform: translateX(6px);
+      color: #c9b28b;
+    }
+
+    @media (max-width: 900px) {
+      .service-item {
+        grid-template-columns: 40px 1fr auto;
+        gap: 1rem;
+        padding: 1.5rem 0;
+      }
+      .service-item__desc {
+        grid-column: 1 / -1;
+        padding-left: 40px;
+        max-width: 100%;
+      }
+      .service-item__title {
+        font-size: 1.3rem;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .service-item {
+        grid-template-columns: 32px 1fr auto;
+      }
+      .service-item__desc {
+        padding-left: 32px;
+        font-size: 0.85rem;
+      }
+    }
+
+    /* ---------- FEATURED WORK ---------- */
+    .work {
+      background: #0a0a0a;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .work__header {
+      margin-bottom: 4rem;
+    }
+
+    .work__header .label {
+      margin-bottom: 1rem;
+    }
+
+    .work__header h2 {
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      line-height: 1.1;
+      color: #ede9e2;
+    }
+
+    .work__grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 1.2rem;
+      grid-auto-rows: 8px;
+    }
+
+    .work-item {
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      grid-row: span 45;
+    }
+
+    .work-item img {
+      transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .work-item:hover img {
+      transform: scale(1.04);
+    }
+
+    .work-item__overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(10, 10, 10, 0.55);
+      opacity: 0;
+      transition: opacity 0.45s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 2rem;
+    }
+
+    .work-item:hover .work-item__overlay {
+      opacity: 1;
+    }
+
+    .work-item__cat {
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #c9b28b;
+      margin-bottom: 0.5rem;
+      transform: translateY(12px);
+      transition: transform 0.45s ease 0.05s;
+    }
+
+    .work-item__title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      color: #f5f3ef;
+      margin-bottom: 0.6rem;
+      transform: translateY(12px);
+      transition: transform 0.45s ease 0.1s;
+    }
+
+    .work-item__link {
+      font-size: 0.65rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(245, 243, 239, 0.8);
+      transform: translateY(12px);
+      transition: transform 0.45s ease 0.15s;
+    }
+
+    .work-item:hover .work-item__cat,
+    .work-item:hover .work-item__title,
+    .work-item:hover .work-item__link {
+      transform: translateY(0);
+    }
+
+    /* Asymmetric grid spans */
+    .work-item--a {
+      grid-column: 1 / 7;
+      grid-row: span 55;
+    }
+    .work-item--b {
+      grid-column: 7 / 13;
+      grid-row: span 40;
+      margin-top: 5rem;
+    }
+    .work-item--c {
+      grid-column: 1 / 5;
+      grid-row: span 38;
+    }
+    .work-item--d {
+      grid-column: 5 / 9;
+      grid-row: span 52;
+      margin-top: -3rem;
+    }
+    .work-item--e {
+      grid-column: 9 / 13;
+      grid-row: span 42;
+      margin-top: 2rem;
+    }
+    .work-item--f {
+      grid-column: 1 / 8;
+      grid-row: span 50;
+    }
+    .work-item--g {
+      grid-column: 8 / 13;
+      grid-row: span 44;
+      margin-top: 4rem;
+    }
+
+    @media (max-width: 900px) {
+      .work__grid {
+        grid-template-columns: repeat(6, 1fr);
+        gap: 1rem;
+      }
+      .work-item--a {
+        grid-column: 1 / 7;
+        grid-row: span 50;
+      }
+      .work-item--b {
+        grid-column: 1 / 4;
+        grid-row: span 40;
+        margin-top: 0;
+      }
+      .work-item--c {
+        grid-column: 4 / 7;
+        grid-row: span 40;
+        margin-top: 3rem;
+      }
+      .work-item--d {
+        grid-column: 1 / 7;
+        grid-row: span 45;
+        margin-top: 0;
+      }
+      .work-item--e {
+        grid-column: 1 / 4;
+        grid-row: span 38;
+        margin-top: 0;
+      }
+      .work-item--f {
+        grid-column: 4 / 7;
+        grid-row: span 38;
+        margin-top: 2rem;
+      }
+      .work-item--g {
+        grid-column: 1 / 7;
+        grid-row: span 42;
+        margin-top: 0;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .work__grid {
+        grid-template-columns: 1fr;
+        grid-auto-rows: auto;
+        gap: 1rem;
+      }
+      .work-item {
+        grid-column: 1 / -1 !important;
+        grid-row: auto !important;
+        margin-top: 0 !important;
+        aspect-ratio: 4/5;
+      }
+      .work-item--a {
+        aspect-ratio: 3/2;
+      }
+    }
+
+    /* ---------- EDITORIAL FEATURE ---------- */
+    .editorial-feature {
+      position: relative;
+      min-height: 80vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      background: #0a0a0a;
+      padding: 0;
+    }
+
+    .editorial-feature__bg {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+    }
+
+    .editorial-feature__bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.5) contrast(1.1);
+    }
+
+    .editorial-feature__overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to right,
+        rgba(10, 10, 10, 0.85) 0%,
+        rgba(10, 10, 10, 0.3) 60%,
+        rgba(10, 10, 10, 0.5) 100%
+      );
+      z-index: 2;
+    }
+
+    .editorial-feature__content {
+      position: relative;
+      z-index: 3;
+      padding: 8rem 5vw;
+      max-width: 800px;
+    }
+
+    .editorial-feature__title {
+      font-size: clamp(2.8rem, 7vw, 6rem);
+      line-height: 1.05;
+      color: #f5f3ef;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.02em;
+    }
+
+    .editorial-feature__text {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: rgba(245, 243, 239, 0.7);
+      max-width: 420px;
+      margin-bottom: 2rem;
+    }
+
+    .editorial-feature__link {
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #c9b28b;
+      border-bottom: 1px solid rgba(201, 178, 139, 0.4);
+      padding-bottom: 4px;
+      transition: border-color 0.3s ease;
+    }
+
+    .editorial-feature__link:hover {
+      border-color: #c9b28b;
+    }
+
+    /* ---------- WHO I STYLE ---------- */
+    .who {
+      background: #0a0a0a;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .who__header {
+      margin-bottom: 4rem;
+    }
+
+    .who__header .label {
+      margin-bottom: 1rem;
+    }
+
+    .who__header h2 {
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      line-height: 1.1;
+      color: #ede9e2;
+    }
+
+    .who__grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+    }
+
+    .who__item {
+      position: relative;
+    }
+
+    .who__item-img {
+      aspect-ratio: 3/4;
+      overflow: hidden;
+      margin-bottom: 1.5rem;
+    }
+
+    .who__item-img img {
+      transition: transform 0.7s ease;
+    }
+
+    .who__item:hover .who__item-img img {
+      transform: scale(1.04);
+    }
+
+    .who__item-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      color: #ede9e2;
+      margin-bottom: 0.6rem;
+    }
+
+    .who__item-desc {
+      font-size: 0.85rem;
+      line-height: 1.6;
+      color: rgba(245, 243, 239, 0.5);
+    }
+
+    @media (max-width: 900px) {
+      .who__grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+      }
+    }
+
+    @media (max-width: 500px) {
+      .who__grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+      .who__item-img {
+        aspect-ratio: 4/5;
+      }
+    }
+
+    /* ---------- ABOUT ---------- */
+    .about {
+      background: #0a0a0a;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .about__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .about__img {
+      aspect-ratio: 4/5;
+      overflow: hidden;
+    }
+
+    .about__img img {
+      filter: brightness(0.9) contrast(1.05);
+    }
+
+    .about__content .label {
+      margin-bottom: 1.5rem;
+    }
+
+    .about__title {
+      font-size: clamp(2.4rem, 4.5vw, 4rem);
+      line-height: 1.1;
+      color: #ede9e2;
+      margin-bottom: 1.8rem;
+    }
+
+    .about__text {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: rgba(245, 243, 239, 0.65);
+      margin-bottom: 1.2rem;
+      max-width: 460px;
+    }
+
+    .about__location {
+      font-size: 0.75rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #c9b28b;
+      margin-bottom: 2rem;
+    }
+
+    .about__link {
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #f5f3ef;
+      border-bottom: 1px solid rgba(245, 243, 239, 0.3);
+      padding-bottom: 4px;
+      transition: border-color 0.3s ease;
+    }
+
+    .about__link:hover {
+      border-color: #f5f3ef;
+    }
+
+    @media (max-width: 900px) {
+      .about__grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+      .about__img {
+        aspect-ratio: 3/4;
+        max-width: 500px;
+      }
+    }
+
+    /* ---------- FEATURED / COLLABORATIONS ---------- */
+    .features {
+      background: #0a0a0a;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding: 5rem 0;
+    }
+
+    .features__header {
+      margin-bottom: 3rem;
+    }
+
+    .features__header .label {
+      margin-bottom: 0.8rem;
+    }
+
+    .features__header h2 {
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      line-height: 1.2;
+      color: #ede9e2;
+    }
+
+    .features__list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem 3rem;
+      align-items: center;
+    }
+
+    .features__item {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      letter-spacing: 0.08em;
+      color: rgba(245, 243, 239, 0.4);
+      transition: color 0.3s ease;
+    }
+
+    .features__item:hover {
+      color: rgba(245, 243, 239, 0.8);
+    }
+
+    /* ---------- JOURNAL ---------- */
+    .journal {
+      background: #0a0a0a;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .journal__header {
+      margin-bottom: 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+
+    .journal__header .label {
+      margin-bottom: 1rem;
+    }
+
+    .journal__header h2 {
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      line-height: 1.1;
+      color: #ede9e2;
+    }
+
+    .journal__follow {
+      font-size: 0.7rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #c9b28b;
+      border-bottom: 1px solid rgba(201, 178, 139, 0.4);
+      padding-bottom: 4px;
+      transition: border-color 0.3s ease;
+    }
+
+    .journal__follow:hover {
+      border-color: #c9b28b;
+    }
+
+    .journal__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+
+    .journal__item {
+      cursor: pointer;
+    }
+
+    .journal__item-img {
+      aspect-ratio: 4/5;
+      overflow: hidden;
+      margin-bottom: 1.2rem;
+    }
+
+    .journal__item-img img {
+      transition: transform 0.7s ease;
+    }
+
+    .journal__item:hover .journal__item-img img {
+      transform: scale(1.04);
+    }
+
+    .journal__item-cat {
+      font-size: 0.6rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #c9b28b;
+      margin-bottom: 0.4rem;
+    }
+
+    .journal__item-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      color: #ede9e2;
+      margin-bottom: 0.4rem;
+      line-height: 1.3;
+    }
+
+    .journal__item-date {
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      color: rgba(245, 243, 239, 0.4);
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 900px) {
+      .journal__grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 500px) {
+      .journal__grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+    }
+
+    /* ---------- TESTIMONIAL ---------- */
+    .testimonial {
+      background: #0a0a0a;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding: 7rem 0;
+      text-align: center;
+    }
+
+    .testimonial__quote {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 3.5vw, 3rem);
+      line-height: 1.3;
+      color: #ede9e2;
+      max-width: 900px;
+      margin: 0 auto 2rem;
+      font-style: italic;
+      font-weight: 400;
+      position: relative;
+    }
+
+    .testimonial__quote::before {
+      content: '\201C';
+      font-family: 'Playfair Display', serif;
+      font-size: 6rem;
+      color: #c9b28b;
+      opacity: 0.25;
+      position: absolute;
+      top: -3.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      line-height: 1;
+    }
+
+    .testimonial__author {
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(245, 243, 239, 0.45);
+    }
+
+    /* ---------- FINAL CTA ---------- */
+    .final-cta {
+      position: relative;
+      min-height: 70vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+      background: #0a0a0a;
+      padding: 0;
+    }
+
+    .final-cta__bg {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+    }
+
+    .final-cta__bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.35) contrast(1.1);
+    }
+
+    .final-cta__overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(10, 10, 10, 0.6);
+      z-index: 2;
+    }
+
+    .final-cta__content {
+      position: relative;
+      z-index: 3;
+      padding: 6rem 5vw;
+      max-width: 800px;
+    }
+
+    .final-cta__title {
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      line-height: 1.05;
+      color: #f5f3ef;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.02em;
+    }
+
+    .final-cta__text {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: rgba(245, 243, 239, 0.7);
+      margin-bottom: 2.5rem;
+    }
+
+    .final-cta__actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* ---------- FOOTER ---------- */
+    .footer {
+      background: #0a0a0a;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 4rem 0 2rem;
+    }
+
+    .footer__grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    .footer__brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      color: #ede9e2;
+      margin-bottom: 0.6rem;
+    }
+
+    .footer__tagline {
+      font-size: 0.8rem;
+      color: rgba(245, 243, 239, 0.45);
+      letter-spacing: 0.05em;
+    }
+
+    .footer__heading {
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(245, 243, 239, 0.4);
+      margin-bottom: 1.2rem;
+    }
+
+    .footer__links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+    }
+
+    .footer__links a {
+      font-size: 0.85rem;
+      color: rgba(245, 243, 239, 0.65);
+      transition: color 0.25s ease;
+    }
+
+    .footer__links a:hover {
+      color: #f5f3ef;
+    }
+
+    .footer__bottom {
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer__copy {
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(245, 243, 239, 0.35);
+    }
+
+    @media (max-width: 900px) {
+      .footer__grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 2.5rem;
+      }
+    }
+
+    @media (max-width: 500px) {
+      .footer__grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+    }
+
+    /* ---------- SCROLL REVEAL ---------- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 1s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+        transform 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ---------- RESPONSIVE NAV ---------- */
+    @media (max-width: 900px) {
+      .nav__links,
+      .nav__cta {
+        display: none;
+      }
+      .nav__hamburger {
+        display: flex;
+      }
+      .mobile-menu {
+        display: flex;
+      }
+    }
+
+    @media (min-width: 901px) {
+      .mobile-menu {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========== NAVIGATION ========== -->
+  <nav class="nav" id="nav">
+    <div class="nav__inner">
+      <a href="#" class="nav__logo">STYLISTLK</a>
+      <div class="nav__links">
+        <a href="#">HOME</a>
+        <a href="#about">ABOUT</a>
+        <a href="#services">SERVICES</a>
+        <a href="#work">WORK</a>
+        <a href="#journal">JOURNAL</a>
+      </div>
+      <a href="#contact" class="nav__cta">BOOK A CONSULTATION</a>
+      <button class="nav__hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#" onclick="closeMenu()">HOME</a>
+    <a href="#about" onclick="closeMenu()">ABOUT</a>
+    <a href="#services" onclick="closeMenu()">SERVICES</a>
+    <a href="#work" onclick="closeMenu()">WORK</a>
+    <a href="#journal" onclick="closeMenu()">JOURNAL</a>
+    <a href="#contact" class="nav__cta" onclick="closeMenu()">BOOK A CONSULTATION</a>
+  </div>
+
+  <!-- ========== HERO ========== -->
+  <section class="hero">
+    <div class="hero__bg">
+      <img
+        src="https://images.unsplash.com/photo-1509631179647-0177331693ae?q=80&w=2070&auto=format&fit=crop"
+        alt="Editorial fashion photography — dramatic silhouette"
+      />
+    </div>
+    <div class="hero__overlay"></div>
+    <div class="hero__content">
+      <p class="hero__label label label--gold">FASHION STYLIST • SRI LANKA</p>
+      <h1 class="hero__title serif">
+        <span>STYLE</span>
+        <span>THAT SPEAKS</span>
+        <span>BEFORE YOU DO.</span>
+      </h1>
+      <p class="hero__desc">
+        Personal styling, fashion direction and image curation for individuals,
+        brands and special occasions.
+      </p>
+      <div class="hero__actions">
+        <a href="#contact" class="btn btn--solid">BOOK A CONSULTATION</a>
+        <a href="#work" class="btn">VIEW MY WORK</a>
+      </div>
+    </div>
+    <div class="hero__scroll">
+      SCROLL TO EXPLORE <span>↓</span>
+    </div>
+  </section>
+
+  <!-- ========== INTRO ========== -->
+  <section class="intro" id="intro">
+    <div class="container">
+      <div class="intro__grid reveal">
+        <div class="intro__left">
+          <p class="label">THE STYLISTLK APPROACH</p>
+          <h2 class="intro__headline serif">
+            Your clothes are only<br />part of the story.
+          </h2>
+        </div>
+        <div class="intro__right">
+          <p>
+            Style is about more than what you wear. It's about how you present
+            yourself, how you feel, and how you're remembered.
+          </p>
+          <p>
+            STYLISTLK helps individuals and brands create a distinctive visual
+            identity through thoughtful styling, fashion direction and carefully
+            curated looks.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SERVICES ========== -->
+  <section class="services" id="services">
+    <div class="container">
+      <div class="services__header reveal">
+        <p class="label">WHAT I DO</p>
+        <h2 class="serif">SERVICES</h2>
+      </div>
+      <div class="services__list">
+        <div class="service-item reveal">
+          <span class="service-item__num">01</span>
+          <span class="service-item__title serif">PERSONAL STYLING</span>
+          <span class="service-item__desc">Build a wardrobe and personal image that feels intentional, authentic and uniquely yours.</span>
+          <span class="service-item__arrow">→</span>
+        </div>
+        <div class="service-item reveal">
+          <span class="service-item__num">02</span>
+          <span class="service-item__title serif">EVENT & OCCASION STYLING</span>
+          <span class="service-item__desc">From intimate celebrations to major events, create a look that belongs in the room.</span>
+          <span class="service-item__arrow">→</span>
+        </div>
+        <div class="service-item reveal">
+          <span class="service-item__num">03</span>
+          <span class="service-item__title serif">FASHION DIRECTION</span>
+          <span class="service-item__desc">Visual direction and styling for campaigns, editorial shoots, brands and creative projects.</span>
+          <span class="service-item__arrow">→</span>
+        </div>
+        <div class="service-item reveal">
+          <span class="service-item__num">04</span>
+          <span class="service-item__title serif">SHOPPING ASSISTANCE</span>
+          <span class="service-item__desc">Curated shopping support to find pieces that work with your style, personality and occasion.</span>
+          <span class="service-item__arrow">→</span>
+        </div>
+        <div class="service-item reveal">
+          <span class="service-item__num">05</span>
+          <span class="service-item__title serif">EDITORIAL & CONTENT STYLING</span>
+          <span class="service-item__desc">Create cohesive fashion stories for photography, social media and editorial content.</span>
+          <span class="service-item__arrow">→</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FEATURED WORK ========== -->
+  <section class="work" id="work">
+    <div class="container">
+      <div class="work__header reveal">
+        <p class="label">SELECTED WORK</p>
+        <h2 class="serif">PORTFOLIO</h2>
+      </div>
+    </div>
+    <div class="container">
+      <div class="work__grid">
+        <div class="work-item work-item--a reveal">
+          <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=2070&auto=format&fit=crop" alt="Event Editorial" />
+          <div class="work-item__overlay">
+            <span class="work-item__cat">EVENT EDITORIAL</span>
+            <span class="work-item__title serif">Evening Drama</span>
+            <span class="work-item__link">VIEW PROJECT →</span>
+          </div>
+        </div>
+        <div class="work-item work-item--b reveal">
+          <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?q=80&w=1974&auto=format&fit=crop" alt="Editorial Portraits" />
+          <div class="work-item__overlay">
+            <span class="work-item__cat">EDITORIAL PORTRAITS</span>
+            <span class="work-item__title serif">The Portrait Series</span>
+            <span class="work-item__link">VIEW PROJECT →</span>
+          </div>
+        </div>
+        <div class="work-item work-item--c reveal">
+          <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=2070&auto=format&fit=crop" alt="Fashion Campaign" />
+          <div class="work-item__overlay">
+            <span class="work-item__cat">FASHION CAMPAIGN</span>
+            <span class="work-item__title serif">Monochrome Study</span>
+            <span class="work-item__link">VIEW PROJECT →</span>
+          </div>
+        </div>
+        <div class="work-item work-item--d reveal">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1974&auto=format&fit=crop" alt="Male Style" />
+          <div class="work-item__overlay">
+            <span class="work-item__cat">MALE STYLE</span>
+            <span class="work-item__title serif">Tailored Presence</span>
+            <span class="work-item__link">VIEW PROJECT →</span>
+          </div>
+        </div>
+        <div class="work-item work-item--e reveal">
+          <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=2070&auto=format&fit=crop" alt="Fashion Event" />
+          <div class="work-item__overlay">
+            <span class="work-item__cat">FASHION EVENT</span>
+            <span class="work-item__title serif">Runway Report</span>
+            <span class="work-item__link">VIEW PROJECT →</span>
+          </div>
+        </div>
+        <div class="work-item work-item--f reveal">
+          <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=2070&auto=format&fit=crop" alt="Personal Styling" />
+          <div class="work-item__overlay">
+            <span class="work-item__cat">PERSONAL STYLING</span>
+            <span class="work-item__title serif">Everyday Icon</span>
+            <span class="work-item__link">VIEW PROJECT →</span>
+          </div>
+        </div>
+        <div class="work-item work-item--g reveal">
+          <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=1974&auto=format&fit=crop" alt="Editorial" />
+          <div class="work-item__overlay">
+            <span class="work-item__cat">EDITORIAL</span>
+            <span class="work-item__title serif">Light & Shadow</span>
+            <span class="work-item__link">VIEW PROJECT →</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== EDITORIAL FEATURE ========== -->
+  <section class="editorial-feature">
+    <div class="editorial-feature__bg">
+      <img
+        src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?q=80&w=2070&auto=format&fit=crop"
+        alt="Editorial fashion spread"
+      />
+    </div>
+    <div class="editorial-feature__overlay"></div>
+    <div class="editorial-feature__content reveal">
+      <h2 class="editorial-feature__title serif">
+        STYLE IS<br />A FORM OF<br />COMMUNICATION.
+      </h2>
+      <p class="editorial-feature__text">
+        The right look doesn't simply make an impression. It tells people
+        something about who you are before you say a word.
+      </p>
+      <a href="#journal" class="editorial-feature__link">EXPLORE THE JOURNAL →</a>
+    </div>
+  </section>
+
+  <!-- ========== WHO I STYLE ========== -->
+  <section class="who">
+    <div class="container">
+      <div class="who__header reveal">
+        <p class="label">WHO I STYLE</p>
+        <h2 class="serif">CLIENTS</h2>
+      </div>
+      <div class="who__grid">
+        <div class="who__item reveal">
+          <div class="who__item-img">
+            <img src="https://images.unsplash.com/photo-1485968579580-b6d095142e6e?q=80&w=1974&auto=format&fit=crop" alt="Individuals" />
+          </div>
+          <h3 class="who__item-title serif">INDIVIDUALS</h3>
+          <p class="who__item-desc">For people looking to refine their personal style and confidence.</p>
+        </div>
+        <div class="who__item reveal">
+          <div class="who__item-img">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1974&auto=format&fit=crop" alt="Professionals" />
+          </div>
+          <h3 class="who__item-title serif">PROFESSIONALS</h3>
+          <p class="who__item-desc">For professionals who want their appearance to match the image they project.</p>
+        </div>
+        <div class="who__item reveal">
+          <div class="who__item-img">
+            <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=2070&auto=format&fit=crop" alt="Creatives" />
+          </div>
+          <h3 class="who__item-title serif">CREATIVES</h3>
+          <p class="who__item-desc">For photographers, creators, artists and production teams who need fashion direction.</p>
+        </div>
+        <div class="who__item reveal">
+          <div class="who__item-img">
+            <img src="https://images.unsplash.com/photo-1475721027785-f74eccf877e2?q=80&w=2070&auto=format&fit=crop" alt="Brands & Events" />
+          </div>
+          <h3 class="who__item-title serif">BRANDS & EVENTS</h3>
+          <p class="who__item-desc">For campaigns, events, fashion productions and visual projects.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== ABOUT ========== -->
+  <section class="about" id="about">
+    <div class="container">
+      <div class="about__grid">
+        <div class="about__img reveal">
+          <img
+            src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?q=80&w=1974&auto=format&fit=crop"
+            alt="Portrait of the stylist"
+          />
+        </div>
+        <div class="about__content reveal">
+          <p class="label">ABOUT STYLISTLK</p>
+          <h2 class="about__title serif">
+            STYLE, CURATED<br />WITH INTENTION.
+          </h2>
+          <p class="about__text">
+            STYLISTLK is a fashion styling practice built on the belief that
+            how you present yourself is a form of self-expression. Every look
+            is considered — never accidental.
+          </p>
+          <p class="about__text">
+            Working across personal styling, editorial direction and event
+            dressing, the approach is always collaborative, discreet and
+            tailored to the individual.
+          </p>
+          <p class="about__location">Based in Sri Lanka.</p>
+          <a href="#" class="about__link">MORE ABOUT STYLISTLK →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FEATURED / COLLABORATIONS ========== -->
+  <section class="features">
+    <div class="container">
+      <div class="features__header reveal">
+        <p class="label">FEATURED / COLLABORATIONS</p>
+        <h2 class="serif">SELECTED FEATURES</h2>
+      </div>
+      <div class="features__list reveal">
+        <span class="features__item">PUBLICATION NAME</span>
+        <span class="features__item">BRAND NAME</span>
+        <span class="features__item">EVENT NAME</span>
+        <span class="features__item">COLLABORATION</span>
+        <span class="features__item">FASHION HOUSE</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== JOURNAL ========== -->
+  <section class="journal" id="journal">
+    <div class="container">
+      <div class="journal__header reveal">
+        <div>
+          <p class="label">FROM THE JOURNAL</p>
+          <h2 class="serif">LATEST NOTES</h2>
+        </div>
+        <a href="#" class="journal__follow">FOLLOW @STYLISTLK →</a>
+      </div>
+      <div class="journal__grid">
+        <div class="journal__item reveal">
+          <div class="journal__item-img">
+            <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=2070&auto=format&fit=crop" alt="Journal" />
+          </div>
+          <p class="journal__item-cat">STYLE NOTES</p>
+          <h3 class="journal__item-title serif">5 Ways to Elevate Your Everyday Look</h3>
+          <p class="journal__item-date">JAN 2026</p>
+        </div>
+        <div class="journal__item reveal">
+          <div class="journal__item-img">
+            <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?q=80&w=2070&auto=format&fit=crop" alt="Journal" />
+          </div>
+          <p class="journal__item-cat">EDITORIAL</p>
+          <h3 class="journal__item-title serif">The Art of Monochrome</h3>
+          <p class="journal__item-date">DEC 2025</p>
+        </div>
+        <div class="journal__item reveal">
+          <div class="journal__item-img">
+            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=2070&auto=format&fit=crop" alt="Journal" />
+          </div>
+          <p class="journal__item-cat">EVENTS</p>
+          <h3 class="journal__item-title serif">Behind the Look</h3>
+          <p class="journal__item-date">NOV 2025</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== TESTIMONIAL ========== -->
+  <section class="testimonial">
+    <div class="container reveal">
+      <blockquote class="testimonial__quote serif">
+        Working with STYLISTLK completely changed the way I approached my wardrobe.
+      </blockquote>
+      <p class="testimonial__author">— CLIENT NAME</p>
+    </div>
+  </section>
+
+  <!-- ========== FINAL CTA ========== -->
+  <section class="final-cta" id="contact">
+    <div class="final-cta__bg">
+      <img
+        src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=2070&auto=format&fit=crop"
+        alt="Editorial background"
+      />
+    </div>
+    <div class="final-cta__overlay"></div>
+    <div class="final-cta__content reveal">
+      <h2 class="final-cta__title serif">
+        READY TO<br />DEFINE YOUR STYLE?
+      </h2>
+      <p class="final-cta__text">
+        Let's create a look that feels unmistakably yours.
+      </p>
+      <div class="final-cta__actions">
+        <a href="#" class="btn btn--solid">BOOK A CONSULTATION →</a>
+        <a href="#" class="btn">CONTACT →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div>
+          <p class="footer__brand serif">STYLISTLK</p>
+          <p class="footer__tagline">Fashion Stylist • Sri Lanka</p>
+        </div>
+        <div>
+          <p class="footer__heading">NAVIGATION</p>
+          <ul class="footer__links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#work">Work</a></li>
+            <li><a href="#journal">Journal</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer__heading">SOCIAL</p>
+          <ul class="footer__links">
+            <li><a href="#">Instagram</a></li>
+            <li><a href="#">YouTube</a></li>
+            <li><a href="#">TikTok</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer__heading">CONTACT</p>
+          <ul class="footer__links">
+            <li><a href="mailto:hello@stylistlk.com">Email</a></li>
+            <li><a href="#">WhatsApp</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p class="footer__copy">© 2026 STYLISTLK. ALL RIGHTS RESERVED.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========== SCRIPTS ========== -->
+  <script>
+    // Sticky nav background on scroll
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 60) {
+        nav.classList.add('nav--scrolled');
+      } else {
+        nav.classList.remove('nav--scrolled');
+      }
+    });
+
+    // Mobile menu toggle
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      mobileMenu.classList.toggle('open');
+      document.body.style.overflow = mobileMenu.classList.contains('open')
+        ? 'hidden'
+        : '';
+    });
+
+    function closeMenu() {
+      hamburger.classList.remove('active');
+      mobileMenu.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    // Scroll reveal via IntersectionObserver
+    const revealElements = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+    );
+
+    revealElements.forEach((el) => revealObserver.observe(el));
+
+    // Subtle parallax on hero image (optional, very light)
+    const heroImg = document.querySelector('.hero__bg img');
+    if (heroImg) {
+      window.addEventListener('scroll', () => {
+        const scrollY = window.scrollY;
+        if (scrollY < window.innerHeight) {
+          heroImg.style.transform = `scale(1.0) translateY(${scrollY * 0.15}px)`;
+        }
+      });
+    }
+  </script>
+</body>
+</html>
