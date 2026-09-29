@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>STYLISTLK — Fashion Stylist • Sri Lanka</title>
-  <!-- Fonts: high-contrast serif + clean sans-serif -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
@@ -12,6 +11,68 @@
     rel="stylesheet"
   />
   <style>
+    /* ============================================================
+       THEME TOKENS
+       ============================================================ */
+    :root,
+    [data-theme="dark"] {
+      --bg: #0a0a0a;
+      --bg-elevated: #111111;
+      --text-primary: #f5f3ef;
+      --text-secondary: rgba(245, 243, 239, 0.62);
+      --text-tertiary: rgba(245, 243, 239, 0.38);
+      --text-faint: rgba(245, 243, 239, 0.22);
+      --accent: #c9b28b;
+      --accent-faint: rgba(201, 178, 139, 0.35);
+      --border: rgba(255, 255, 255, 0.07);
+      --border-soft: rgba(255, 255, 255, 0.05);
+      --hover-bg: rgba(255, 255, 255, 0.025);
+      --nav-bg: rgba(10, 10, 10, 0.85);
+      --nav-solid: rgba(10, 10, 10, 0.92);
+      --btn-border: rgba(245, 243, 239, 0.4);
+      --btn-solid-bg: #f5f3ef;
+      --btn-solid-text: #0a0a0a;
+      --scrollbar-track: #0a0a0a;
+      --scrollbar-thumb: #2a2a2a;
+      --overlay-gradient: linear-gradient(
+        to right,
+        rgba(10, 10, 10, 0.75) 0%,
+        rgba(10, 10, 10, 0.35) 50%,
+        rgba(10, 10, 10, 0.6) 100%
+      );
+      --img-brightness: 0.7;
+      --card-shadow: none;
+    }
+
+    [data-theme="light"] {
+      --bg: #f7f5f1;
+      --bg-elevated: #ffffff;
+      --text-primary: #1a1815;
+      --text-secondary: rgba(26, 24, 21, 0.68);
+      --text-tertiary: rgba(26, 24, 21, 0.45);
+      --text-faint: rgba(26, 24, 21, 0.25);
+      --accent: #9a7b4a;
+      --accent-faint: rgba(154, 123, 74, 0.35);
+      --border: rgba(26, 24, 21, 0.1);
+      --border-soft: rgba(26, 24, 21, 0.07);
+      --hover-bg: rgba(26, 24, 21, 0.03);
+      --nav-bg: rgba(247, 245, 241, 0.85);
+      --nav-solid: rgba(247, 245, 241, 0.95);
+      --btn-border: rgba(26, 24, 21, 0.35);
+      --btn-solid-bg: #1a1815;
+      --btn-solid-text: #f7f5f1;
+      --scrollbar-track: #f7f5f1;
+      --scrollbar-thumb: #d8d3c9;
+      --overlay-gradient: linear-gradient(
+        to right,
+        rgba(247, 245, 241, 0.8) 0%,
+        rgba(247, 245, 241, 0.35) 50%,
+        rgba(247, 245, 241, 0.65) 100%
+      );
+      --img-brightness: 0.95;
+      --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    }
+
     /* ---------- RESET & BASE ---------- */
     * {
       margin: 0;
@@ -24,13 +85,15 @@
     }
 
     body {
-      background-color: #0a0a0a;
-      color: #f5f3ef;
+      background-color: var(--bg);
+      color: var(--text-primary);
       font-family: 'Inter', 'Helvetica Neue', sans-serif;
       font-weight: 300;
-      line-height: 1.5;
+      line-height: 1.6;
+      font-size: 15px;
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
+      transition: background-color 0.5s ease, color 0.5s ease;
     }
 
     a {
@@ -48,71 +111,62 @@
     /* ---------- UTILITY ---------- */
     .container {
       width: 100%;
-      max-width: 1440px;
+      max-width: 1320px;
       margin: 0 auto;
       padding: 0 5vw;
-    }
-
-    .sr-only {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      border: 0;
     }
 
     /* ---------- TYPOGRAPHY ---------- */
     .serif {
       font-family: 'Playfair Display', 'Cormorant Garamond', 'Bodoni MT', serif;
       font-weight: 400;
-      letter-spacing: -0.02em;
+      letter-spacing: -0.01em;
     }
 
     .label {
       font-family: 'Inter', sans-serif;
-      font-size: 0.7rem;
+      font-size: 0.62rem;
       font-weight: 500;
-      letter-spacing: 0.18em;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: #b8b2a8;
+      color: var(--text-tertiary);
     }
 
     .label--gold {
-      color: #c9b28b;
+      color: var(--accent);
     }
 
     /* ---------- SCROLLBAR ---------- */
     ::-webkit-scrollbar {
-      width: 6px;
+      width: 5px;
     }
     ::-webkit-scrollbar-track {
-      background: #0a0a0a;
+      background: var(--scrollbar-track);
     }
     ::-webkit-scrollbar-thumb {
-      background: #2a2a2a;
+      background: var(--scrollbar-thumb);
     }
 
-    /* ---------- NAVIGATION ---------- */
+    /* ============================================================
+       NAVIGATION
+       ============================================================ */
     .nav {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       z-index: 1000;
-      padding: 1.5rem 0;
+      padding: 1.2rem 0;
       transition: background 0.45s ease, backdrop-filter 0.45s ease,
         border-color 0.45s ease;
       border-bottom: 1px solid transparent;
     }
 
     .nav--scrolled {
-      background: rgba(10, 10, 10, 0.85);
+      background: var(--nav-bg);
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      border-bottom: 1px solid var(--border-soft);
     }
 
     .nav__inner {
@@ -120,32 +174,34 @@
       align-items: center;
       justify-content: space-between;
       width: 100%;
-      max-width: 1440px;
+      max-width: 1320px;
       margin: 0 auto;
       padding: 0 5vw;
+      gap: 1.5rem;
     }
 
     .nav__logo {
       font-family: 'Playfair Display', serif;
-      font-size: 1.4rem;
+      font-size: 1.15rem;
       font-weight: 500;
-      letter-spacing: 0.08em;
-      color: #f5f3ef;
+      letter-spacing: 0.1em;
+      color: var(--text-primary);
+      flex-shrink: 0;
     }
 
     .nav__links {
       display: flex;
-      gap: 2.6rem;
+      gap: 2.2rem;
       align-items: center;
     }
 
     .nav__links a {
-      font-size: 0.7rem;
+      font-size: 0.62rem;
       font-weight: 500;
-      letter-spacing: 0.14em;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
-      color: #f5f3ef;
-      opacity: 0.8;
+      color: var(--text-primary);
+      opacity: 0.75;
       transition: opacity 0.25s ease;
     }
 
@@ -153,20 +209,79 @@
       opacity: 1;
     }
 
+    .nav__actions {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      flex-shrink: 0;
+    }
+
     .nav__cta {
-      font-size: 0.7rem;
+      font-size: 0.62rem;
       font-weight: 500;
-      letter-spacing: 0.14em;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      padding: 0.7rem 1.4rem;
-      transition: background 0.3s ease, border-color 0.3s ease;
+      border: 1px solid var(--btn-border);
+      padding: 0.6rem 1.2rem;
+      transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+      color: var(--text-primary);
     }
 
     .nav__cta:hover {
-      background: #f5f3ef;
-      color: #0a0a0a;
-      border-color: #f5f3ef;
+      background: var(--btn-solid-bg);
+      color: var(--btn-solid-text);
+      border-color: var(--btn-solid-bg);
+    }
+
+    /* ---------- THEME TOGGLE ---------- */
+    .theme-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: transparent;
+      cursor: pointer;
+      color: var(--text-primary);
+      transition: background 0.3s ease, border-color 0.3s ease,
+        transform 0.3s ease;
+      flex-shrink: 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .theme-toggle:hover {
+      background: var(--hover-bg);
+      border-color: var(--accent-faint);
+    }
+
+    .theme-toggle svg {
+      width: 16px;
+      height: 16px;
+      position: absolute;
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+
+    .theme-toggle .icon-sun {
+      opacity: 0;
+      transform: rotate(-90deg) scale(0.6);
+    }
+
+    .theme-toggle .icon-moon {
+      opacity: 1;
+      transform: rotate(0deg) scale(1);
+    }
+
+    [data-theme="light"] .theme-toggle .icon-sun {
+      opacity: 1;
+      transform: rotate(0deg) scale(1);
+    }
+
+    [data-theme="light"] .theme-toggle .icon-moon {
+      opacity: 0;
+      transform: rotate(90deg) scale(0.6);
     }
 
     .nav__hamburger {
@@ -181,9 +296,9 @@
 
     .nav__hamburger span {
       display: block;
-      width: 24px;
+      width: 22px;
       height: 1.5px;
-      background: #f5f3ef;
+      background: var(--text-primary);
       transition: transform 0.3s ease, opacity 0.3s ease;
     }
 
@@ -205,14 +320,14 @@
       left: 0;
       width: 100%;
       height: 100vh;
-      background: rgba(10, 10, 10, 0.97);
+      background: var(--nav-solid);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       z-index: 999;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 2.2rem;
+      gap: 2rem;
       opacity: 0;
       pointer-events: none;
       transition: opacity 0.4s ease;
@@ -225,17 +340,19 @@
 
     .mobile-menu a {
       font-family: 'Playfair Display', serif;
-      font-size: 1.8rem;
-      color: #f5f3ef;
+      font-size: 1.4rem;
+      color: var(--text-primary);
       letter-spacing: 0.04em;
     }
 
     .mobile-menu .nav__cta {
-      font-size: 0.8rem;
+      font-size: 0.7rem;
       margin-top: 1rem;
     }
 
-    /* ---------- HERO ---------- */
+    /* ============================================================
+       HERO
+       ============================================================ */
     .hero {
       position: relative;
       min-height: 100vh;
@@ -243,7 +360,7 @@
       align-items: center;
       justify-content: flex-start;
       overflow: hidden;
-      background: #0a0a0a;
+      background: var(--bg);
     }
 
     .hero__bg {
@@ -257,10 +374,11 @@
       height: 100%;
       object-fit: cover;
       object-position: center 25%;
-      filter: brightness(0.7) contrast(1.05);
+      filter: brightness(var(--img-brightness)) contrast(1.05);
       animation: heroReveal 1.8s ease-out forwards;
       opacity: 0;
       transform: scale(1.06);
+      transition: filter 0.5s ease;
     }
 
     @keyframes heroReveal {
@@ -277,37 +395,33 @@
     .hero__overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(
-        to right,
-        rgba(10, 10, 10, 0.75) 0%,
-        rgba(10, 10, 10, 0.35) 50%,
-        rgba(10, 10, 10, 0.6) 100%
-      );
+      background: var(--overlay-gradient);
       z-index: 2;
+      transition: background 0.5s ease;
     }
 
     .hero__content {
       position: relative;
       z-index: 3;
       padding: 0 5vw;
-      max-width: 900px;
+      max-width: 720px;
       width: 100%;
-      margin-top: 4rem;
+      margin-top: 2rem;
     }
 
     .hero__label {
-      margin-bottom: 2rem;
+      margin-bottom: 1.6rem;
       opacity: 0;
       animation: fadeUp 1s ease-out 0.4s forwards;
     }
 
     .hero__title {
-      font-size: clamp(3rem, 8vw, 6.5rem);
-      line-height: 1.05;
+      font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+      line-height: 1.08;
       font-weight: 400;
-      color: #f5f3ef;
-      margin-bottom: 1.6rem;
-      letter-spacing: -0.03em;
+      color: var(--text-primary);
+      margin-bottom: 1.4rem;
+      letter-spacing: -0.02em;
     }
 
     .hero__title span {
@@ -327,19 +441,19 @@
     }
 
     .hero__desc {
-      font-size: 1rem;
+      font-size: 0.9rem;
       font-weight: 300;
-      color: rgba(245, 243, 239, 0.75);
-      max-width: 480px;
-      line-height: 1.7;
-      margin-bottom: 2.4rem;
+      color: var(--text-secondary);
+      max-width: 400px;
+      line-height: 1.75;
+      margin-bottom: 2rem;
       opacity: 0;
       animation: fadeUp 1s ease-out 1.05s forwards;
     }
 
     .hero__actions {
       display: flex;
-      gap: 1rem;
+      gap: 0.8rem;
       flex-wrap: wrap;
       opacity: 0;
       animation: fadeUp 1s ease-out 1.2s forwards;
@@ -347,48 +461,48 @@
 
     .btn {
       display: inline-block;
-      font-size: 0.7rem;
+      font-size: 0.62rem;
       font-weight: 500;
-      letter-spacing: 0.16em;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
-      padding: 0.9rem 2rem;
-      border: 1px solid rgba(245, 243, 239, 0.5);
+      padding: 0.8rem 1.6rem;
+      border: 1px solid var(--btn-border);
       background: transparent;
-      color: #f5f3ef;
+      color: var(--text-primary);
       cursor: pointer;
       transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
       font-family: 'Inter', sans-serif;
     }
 
     .btn:hover {
-      background: #f5f3ef;
-      color: #0a0a0a;
-      border-color: #f5f3ef;
+      background: var(--btn-solid-bg);
+      color: var(--btn-solid-text);
+      border-color: var(--btn-solid-bg);
     }
 
     .btn--solid {
-      background: #f5f3ef;
-      color: #0a0a0a;
-      border-color: #f5f3ef;
+      background: var(--btn-solid-bg);
+      color: var(--btn-solid-text);
+      border-color: var(--btn-solid-bg);
     }
 
     .btn--solid:hover {
       background: transparent;
-      color: #f5f3ef;
+      color: var(--text-primary);
     }
 
     .hero__scroll {
       position: absolute;
-      bottom: 2.5rem;
+      bottom: 2rem;
       left: 5vw;
       z-index: 3;
-      font-size: 0.6rem;
-      letter-spacing: 0.2em;
+      font-size: 0.55rem;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: rgba(245, 243, 239, 0.55);
+      color: var(--text-tertiary);
       display: flex;
       align-items: center;
-      gap: 0.6rem;
+      gap: 0.5rem;
       opacity: 0;
       animation: fadeUp 1s ease-out 1.5s forwards;
     }
@@ -410,7 +524,7 @@
     @keyframes fadeUp {
       0% {
         opacity: 0;
-        transform: translateY(30px);
+        transform: translateY(24px);
       }
       100% {
         opacity: 1;
@@ -420,18 +534,20 @@
 
     /* ---------- SECTION SPACING ---------- */
     section {
-      padding: 8rem 0;
+      padding: 5.5rem 0;
     }
 
     @media (max-width: 768px) {
       section {
-        padding: 5rem 0;
+        padding: 3.5rem 0;
       }
     }
 
-    /* ---------- INTRO ---------- */
+    /* ============================================================
+       INTRO
+       ============================================================ */
     .intro {
-      background: #0a0a0a;
+      background: var(--bg);
     }
 
     .intro__grid {
@@ -442,30 +558,31 @@
     }
 
     .intro__left .label {
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.2rem;
     }
 
     .intro__headline {
-      font-size: clamp(2.4rem, 4.5vw, 4rem);
-      line-height: 1.15;
-      color: #ede9e2;
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      line-height: 1.25;
+      color: var(--text-primary);
+      font-weight: 400;
     }
 
     .intro__right {
-      padding-top: 3.5rem;
+      padding-top: 2.4rem;
     }
 
     .intro__right p {
-      font-size: 1.05rem;
+      font-size: 0.9rem;
       line-height: 1.8;
-      color: rgba(245, 243, 239, 0.7);
-      margin-bottom: 1.5rem;
-      max-width: 480px;
+      color: var(--text-secondary);
+      margin-bottom: 1.2rem;
+      max-width: 420px;
     }
 
     .intro__right p:last-child {
-      color: rgba(245, 243, 239, 0.55);
-      font-size: 0.95rem;
+      color: var(--text-tertiary);
+      font-size: 0.85rem;
     }
 
     @media (max-width: 900px) {
@@ -478,303 +595,406 @@
       }
     }
 
-    /* ---------- SERVICES ---------- */
+    /* ============================================================
+       SERVICES — EDITORIAL CARDS LAYOUT (different from Work list)
+       ============================================================ */
     .services {
-      background: #0a0a0a;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      background: var(--bg);
+      border-top: 1px solid var(--border-soft);
+      transition: background-color 0.5s ease, border-color 0.5s ease;
     }
 
     .services__header {
-      margin-bottom: 4rem;
+      margin-bottom: 3rem;
     }
 
     .services__header .label {
-      margin-bottom: 1rem;
+      margin-bottom: 0.8rem;
     }
 
     .services__header h2 {
-      font-size: clamp(2.8rem, 6vw, 5rem);
-      line-height: 1.1;
-      color: #ede9e2;
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      line-height: 1.15;
+      color: var(--text-primary);
     }
 
-    .services__list {
+    /* Two-column editorial card grid — visually distinct from work list */
+    .services__grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.2rem;
+    }
+
+    .service-card {
+      position: relative;
+      padding: 2.2rem 2rem 2rem;
+      border: 1px solid var(--border);
+      background: var(--bg-elevated);
+      transition: border-color 0.4s ease, transform 0.4s ease,
+        background-color 0.5s ease;
+      overflow: hidden;
       display: flex;
       flex-direction: column;
+      justify-content: space-between;
+      min-height: 220px;
     }
 
-    .service-item {
-      display: grid;
-      grid-template-columns: 80px 1fr 1fr auto;
-      gap: 2rem;
-      align-items: center;
-      padding: 2rem 0;
-      border-top: 1px solid rgba(255, 255, 255, 0.06);
-      transition: background 0.3s ease, padding-left 0.3s ease;
-      cursor: pointer;
-      position: relative;
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 2px;
+      height: 0;
+      background: var(--accent);
+      transition: height 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
 
-    .service-item:last-child {
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    .service-card:hover::before {
+      height: 100%;
     }
 
-    .service-item:hover {
-      background: rgba(255, 255, 255, 0.02);
-      padding-left: 1rem;
+    .service-card:hover {
+      border-color: var(--accent-faint);
+      transform: translateY(-4px);
     }
 
-    .service-item__num {
+    .service-card__top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 2.4rem;
+    }
+
+    .service-card__num {
       font-family: 'Playfair Display', serif;
-      font-size: 1.1rem;
-      color: #c9b28b;
+      font-size: 0.8rem;
+      color: var(--accent);
       font-weight: 400;
+      letter-spacing: 0.05em;
     }
 
-    .service-item__title {
+    .service-card__icon {
+      font-size: 1rem;
+      color: var(--text-faint);
+      transition: color 0.4s ease, transform 0.4s ease;
+    }
+
+    .service-card:hover .service-card__icon {
+      color: var(--accent);
+      transform: translate(3px, -3px);
+    }
+
+    .service-card__title {
       font-family: 'Playfair Display', serif;
-      font-size: 1.6rem;
+      font-size: 1.15rem;
       font-weight: 400;
-      color: #ede9e2;
-      letter-spacing: -0.01em;
+      color: var(--text-primary);
+      letter-spacing: -0.005em;
+      line-height: 1.25;
+      margin-bottom: 0.7rem;
     }
 
-    .service-item__desc {
-      font-size: 0.9rem;
-      color: rgba(245, 243, 239, 0.55);
-      line-height: 1.6;
-      max-width: 420px;
+    .service-card__desc {
+      font-size: 0.8rem;
+      color: var(--text-tertiary);
+      line-height: 1.65;
+      max-width: 360px;
     }
 
-    .service-item__arrow {
-      font-size: 1.2rem;
-      color: rgba(245, 243, 239, 0.4);
-      transition: transform 0.3s ease, color 0.3s ease;
-    }
-
-    .service-item:hover .service-item__arrow {
-      transform: translateX(6px);
-      color: #c9b28b;
+    /* Make the last card span full width on 2-col grid for editorial balance */
+    .service-card--wide {
+      grid-column: 1 / -1;
+      min-height: 180px;
     }
 
     @media (max-width: 900px) {
-      .service-item {
-        grid-template-columns: 40px 1fr auto;
+      .services__grid {
+        grid-template-columns: 1fr;
         gap: 1rem;
-        padding: 1.5rem 0;
       }
-      .service-item__desc {
-        grid-column: 1 / -1;
-        padding-left: 40px;
-        max-width: 100%;
+      .service-card {
+        min-height: 180px;
+        padding: 1.8rem 1.6rem 1.6rem;
       }
-      .service-item__title {
-        font-size: 1.3rem;
+      .service-card--wide {
+        grid-column: auto;
+      }
+      .service-card__title {
+        font-size: 1rem;
+      }
+      .service-card__desc {
+        font-size: 0.78rem;
       }
     }
 
-    @media (max-width: 600px) {
-      .service-item {
-        grid-template-columns: 32px 1fr auto;
+    /* ============================================================
+       SELECTED CLIENTS
+       ============================================================ */
+    .clients {
+      background: var(--bg);
+      border-top: 1px solid var(--border-soft);
+      padding: 4rem 0;
+      transition: background-color 0.5s ease, border-color 0.5s ease;
+    }
+
+    .clients__header {
+      margin-bottom: 2rem;
+    }
+
+    .clients__header .label {
+      margin-bottom: 0.6rem;
+    }
+
+    .clients__header h2 {
+      font-size: clamp(1.4rem, 2.5vw, 2rem);
+      line-height: 1.15;
+      color: var(--text-primary);
+    }
+
+    .clients__list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.4rem 3rem;
+      align-items: baseline;
+    }
+
+    .client-item {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      letter-spacing: 0.02em;
+      color: var(--text-faint);
+      transition: color 0.3s ease, transform 0.3s ease;
+      position: relative;
+      cursor: default;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .client-item:hover {
+      color: var(--text-primary);
+      transform: translateX(4px);
+    }
+
+    .client-item__preview {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      overflow: hidden;
+      opacity: 0;
+      transform: scale(0.8);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      flex-shrink: 0;
+    }
+
+    .client-item:hover .client-item__preview {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .client-item__preview img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    @media (max-width: 900px) {
+      .clients__list {
+        gap: 1rem 1.8rem;
       }
-      .service-item__desc {
-        padding-left: 32px;
+      .client-item {
         font-size: 0.85rem;
       }
+      .client-item__preview {
+        width: 26px;
+        height: 26px;
+      }
     }
 
-    /* ---------- FEATURED WORK ---------- */
+    /* ============================================================
+       SELECTED WORK (typography-led list — distinct from Services cards)
+       ============================================================ */
     .work {
-      background: #0a0a0a;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      background: var(--bg);
+      border-top: 1px solid var(--border-soft);
+      transition: background-color 0.5s ease, border-color 0.5s ease;
     }
 
     .work__header {
-      margin-bottom: 4rem;
+      margin-bottom: 2.5rem;
     }
 
     .work__header .label {
-      margin-bottom: 1rem;
+      margin-bottom: 0.8rem;
     }
 
     .work__header h2 {
-      font-size: clamp(2.8rem, 6vw, 5rem);
-      line-height: 1.1;
-      color: #ede9e2;
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      line-height: 1.15;
+      color: var(--text-primary);
     }
 
-    .work__grid {
-      display: grid;
-      grid-template-columns: repeat(12, 1fr);
-      gap: 1.2rem;
-      grid-auto-rows: 8px;
+    .work__list {
+      display: flex;
+      flex-direction: column;
     }
 
     .work-item {
-      position: relative;
-      overflow: hidden;
+      display: grid;
+      grid-template-columns: 44px 1fr auto;
+      gap: 1.6rem;
+      align-items: center;
+      padding: 1.5rem 0;
+      border-top: 1px solid var(--border);
+      transition: background 0.3s ease, padding-left 0.3s ease;
       cursor: pointer;
-      grid-row: span 45;
+      position: relative;
+      text-decoration: none;
+      color: inherit;
     }
 
-    .work-item img {
-      transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    .work-item:last-child {
+      border-bottom: 1px solid var(--border);
     }
 
-    .work-item:hover img {
-      transform: scale(1.04);
+    .work-item:hover {
+      background: var(--hover-bg);
+      padding-left: 1rem;
     }
 
-    .work-item__overlay {
-      position: absolute;
-      inset: 0;
-      background: rgba(10, 10, 10, 0.55);
-      opacity: 0;
-      transition: opacity 0.45s ease;
+    .work-item__num {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.75rem;
+      color: var(--accent);
+      font-weight: 400;
+      letter-spacing: 0.05em;
+    }
+
+    .work-item__title-block {
       display: flex;
       flex-direction: column;
-      justify-content: flex-end;
-      padding: 2rem;
-    }
-
-    .work-item:hover .work-item__overlay {
-      opacity: 1;
-    }
-
-    .work-item__cat {
-      font-size: 0.6rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: #c9b28b;
-      margin-bottom: 0.5rem;
-      transform: translateY(12px);
-      transition: transform 0.45s ease 0.05s;
+      gap: 0.15rem;
     }
 
     .work-item__title {
       font-family: 'Playfair Display', serif;
-      font-size: 1.5rem;
-      color: #f5f3ef;
-      margin-bottom: 0.6rem;
-      transform: translateY(12px);
-      transition: transform 0.45s ease 0.1s;
+      font-size: clamp(1.05rem, 1.8vw, 1.4rem);
+      font-weight: 400;
+      color: var(--text-primary);
+      letter-spacing: -0.01em;
+      transition: transform 0.35s ease;
+      line-height: 1.2;
     }
 
-    .work-item__link {
+    .work-item:hover .work-item__title {
+      transform: translateX(6px);
+    }
+
+    .work-item__cat {
       font-size: 0.65rem;
-      letter-spacing: 0.16em;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: rgba(245, 243, 239, 0.8);
-      transform: translateY(12px);
-      transition: transform 0.45s ease 0.15s;
+      color: var(--text-tertiary);
+      font-weight: 400;
+      transition: transform 0.35s ease;
     }
 
-    .work-item:hover .work-item__cat,
-    .work-item:hover .work-item__title,
-    .work-item:hover .work-item__link {
-      transform: translateY(0);
+    .work-item:hover .work-item__cat {
+      transform: translateX(6px);
     }
 
-    /* Asymmetric grid spans */
-    .work-item--a {
-      grid-column: 1 / 7;
-      grid-row: span 55;
+    .work-item__arrow {
+      font-size: 1.1rem;
+      color: var(--text-faint);
+      transition: transform 0.35s ease, color 0.35s ease;
+      justify-self: end;
     }
-    .work-item--b {
-      grid-column: 7 / 13;
-      grid-row: span 40;
-      margin-top: 5rem;
+
+    .work-item:hover .work-item__arrow {
+      transform: translateX(6px);
+      color: var(--accent);
     }
-    .work-item--c {
-      grid-column: 1 / 5;
-      grid-row: span 38;
+
+    .work-item__preview {
+      position: absolute;
+      right: 70px;
+      top: 50%;
+      transform: translateY(-50%) scale(0.9);
+      width: 70px;
+      height: 95px;
+      overflow: hidden;
+      opacity: 0;
+      transition: opacity 0.35s ease, transform 0.35s ease;
+      pointer-events: none;
+      border-radius: 2px;
     }
-    .work-item--d {
-      grid-column: 5 / 9;
-      grid-row: span 52;
-      margin-top: -3rem;
+
+    .work-item:hover .work-item__preview {
+      opacity: 1;
+      transform: translateY(-50%) scale(1);
     }
-    .work-item--e {
-      grid-column: 9 / 13;
-      grid-row: span 42;
-      margin-top: 2rem;
-    }
-    .work-item--f {
-      grid-column: 1 / 8;
-      grid-row: span 50;
-    }
-    .work-item--g {
-      grid-column: 8 / 13;
-      grid-row: span 44;
-      margin-top: 4rem;
+
+    .work-item__preview img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
     @media (max-width: 900px) {
-      .work__grid {
-        grid-template-columns: repeat(6, 1fr);
-        gap: 1rem;
+      .work-item {
+        grid-template-columns: 32px 1fr auto;
+        gap: 0.8rem;
+        padding: 1.1rem 0;
       }
-      .work-item--a {
-        grid-column: 1 / 7;
-        grid-row: span 50;
+      .work-item__title {
+        font-size: 0.95rem;
       }
-      .work-item--b {
-        grid-column: 1 / 4;
-        grid-row: span 40;
-        margin-top: 0;
+      .work-item__cat {
+        font-size: 0.58rem;
       }
-      .work-item--c {
-        grid-column: 4 / 7;
-        grid-row: span 40;
-        margin-top: 3rem;
+      .work-item__preview {
+        display: none;
       }
-      .work-item--d {
-        grid-column: 1 / 7;
-        grid-row: span 45;
-        margin-top: 0;
+      .work-item:hover {
+        padding-left: 0.5rem;
       }
-      .work-item--e {
-        grid-column: 1 / 4;
-        grid-row: span 38;
-        margin-top: 0;
-      }
-      .work-item--f {
-        grid-column: 4 / 7;
-        grid-row: span 38;
-        margin-top: 2rem;
-      }
-      .work-item--g {
-        grid-column: 1 / 7;
-        grid-row: span 42;
-        margin-top: 0;
+      .work-item:hover .work-item__title,
+      .work-item:hover .work-item__cat {
+        transform: translateX(3px);
       }
     }
 
     @media (max-width: 600px) {
-      .work__grid {
-        grid-template-columns: 1fr;
-        grid-auto-rows: auto;
-        gap: 1rem;
-      }
       .work-item {
-        grid-column: 1 / -1 !important;
-        grid-row: auto !important;
-        margin-top: 0 !important;
-        aspect-ratio: 4/5;
+        grid-template-columns: 26px 1fr auto;
+        gap: 0.5rem;
+        padding: 0.9rem 0;
       }
-      .work-item--a {
-        aspect-ratio: 3/2;
+      .work-item__title {
+        font-size: 0.88rem;
+      }
+      .work-item__cat {
+        font-size: 0.55rem;
+      }
+      .work-item__arrow {
+        font-size: 0.85rem;
+      }
+      .work-item__num {
+        font-size: 0.65rem;
       }
     }
 
-    /* ---------- EDITORIAL FEATURE ---------- */
+    /* ============================================================
+       EDITORIAL FEATURE
+       ============================================================ */
     .editorial-feature {
       position: relative;
-      min-height: 80vh;
+      min-height: 60vh;
       display: flex;
       align-items: center;
       overflow: hidden;
-      background: #0a0a0a;
+      background: var(--bg);
       padding: 0;
     }
 
@@ -803,127 +1023,73 @@
       z-index: 2;
     }
 
+    [data-theme="light"] .editorial-feature__overlay {
+      background: linear-gradient(
+        to right,
+        rgba(247, 245, 241, 0.9) 0%,
+        rgba(247, 245, 241, 0.4) 60%,
+        rgba(247, 245, 241, 0.7) 100%
+      );
+    }
+
     .editorial-feature__content {
       position: relative;
       z-index: 3;
-      padding: 8rem 5vw;
-      max-width: 800px;
+      padding: 6rem 5vw;
+      max-width: 620px;
     }
 
     .editorial-feature__title {
-      font-size: clamp(2.8rem, 7vw, 6rem);
-      line-height: 1.05;
+      font-size: clamp(1.8rem, 4vw, 3.2rem);
+      line-height: 1.12;
+      color: var(--text-primary);
+      margin-bottom: 1.2rem;
+      letter-spacing: -0.015em;
+    }
+
+    [data-theme="dark"] .editorial-feature__title {
       color: #f5f3ef;
-      margin-bottom: 1.5rem;
-      letter-spacing: -0.02em;
     }
 
     .editorial-feature__text {
-      font-size: 1rem;
+      font-size: 0.88rem;
       line-height: 1.8;
-      color: rgba(245, 243, 239, 0.7);
-      max-width: 420px;
-      margin-bottom: 2rem;
+      color: var(--text-secondary);
+      max-width: 380px;
+      margin-bottom: 1.6rem;
+    }
+
+    [data-theme="dark"] .editorial-feature__text {
+      color: rgba(245, 243, 239, 0.65);
     }
 
     .editorial-feature__link {
-      font-size: 0.7rem;
-      letter-spacing: 0.18em;
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: #c9b28b;
-      border-bottom: 1px solid rgba(201, 178, 139, 0.4);
-      padding-bottom: 4px;
+      color: var(--accent);
+      border-bottom: 1px solid var(--accent-faint);
+      padding-bottom: 3px;
       transition: border-color 0.3s ease;
     }
 
     .editorial-feature__link:hover {
-      border-color: #c9b28b;
+      border-color: var(--accent);
     }
 
-    /* ---------- WHO I STYLE ---------- */
-    .who {
-      background: #0a0a0a;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
-    }
-
-    .who__header {
-      margin-bottom: 4rem;
-    }
-
-    .who__header .label {
-      margin-bottom: 1rem;
-    }
-
-    .who__header h2 {
-      font-size: clamp(2.8rem, 6vw, 5rem);
-      line-height: 1.1;
-      color: #ede9e2;
-    }
-
-    .who__grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 2rem;
-    }
-
-    .who__item {
-      position: relative;
-    }
-
-    .who__item-img {
-      aspect-ratio: 3/4;
-      overflow: hidden;
-      margin-bottom: 1.5rem;
-    }
-
-    .who__item-img img {
-      transition: transform 0.7s ease;
-    }
-
-    .who__item:hover .who__item-img img {
-      transform: scale(1.04);
-    }
-
-    .who__item-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.3rem;
-      color: #ede9e2;
-      margin-bottom: 0.6rem;
-    }
-
-    .who__item-desc {
-      font-size: 0.85rem;
-      line-height: 1.6;
-      color: rgba(245, 243, 239, 0.5);
-    }
-
-    @media (max-width: 900px) {
-      .who__grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 2rem;
-      }
-    }
-
-    @media (max-width: 500px) {
-      .who__grid {
-        grid-template-columns: 1fr;
-        gap: 2.5rem;
-      }
-      .who__item-img {
-        aspect-ratio: 4/5;
-      }
-    }
-
-    /* ---------- ABOUT ---------- */
+    /* ============================================================
+       ABOUT
+       ============================================================ */
     .about {
-      background: #0a0a0a;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      background: var(--bg);
+      border-top: 1px solid var(--border-soft);
+      transition: background-color 0.5s ease, border-color 0.5s ease;
     }
 
     .about__grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 5rem;
+      gap: 4rem;
       align-items: center;
     }
 
@@ -934,214 +1100,239 @@
 
     .about__img img {
       filter: brightness(0.9) contrast(1.05);
+      transition: filter 0.5s ease;
+    }
+
+    [data-theme="light"] .about__img img {
+      filter: brightness(1) contrast(1.02);
     }
 
     .about__content .label {
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.2rem;
     }
 
     .about__title {
-      font-size: clamp(2.4rem, 4.5vw, 4rem);
-      line-height: 1.1;
-      color: #ede9e2;
-      margin-bottom: 1.8rem;
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      line-height: 1.2;
+      color: var(--text-primary);
+      margin-bottom: 1.4rem;
+      font-weight: 400;
     }
 
     .about__text {
-      font-size: 1rem;
+      font-size: 0.88rem;
       line-height: 1.8;
-      color: rgba(245, 243, 239, 0.65);
-      margin-bottom: 1.2rem;
-      max-width: 460px;
+      color: var(--text-secondary);
+      margin-bottom: 1rem;
+      max-width: 420px;
     }
 
     .about__location {
-      font-size: 0.75rem;
-      letter-spacing: 0.14em;
+      font-size: 0.65rem;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
-      color: #c9b28b;
-      margin-bottom: 2rem;
+      color: var(--accent);
+      margin-bottom: 1.6rem;
     }
 
     .about__link {
-      font-size: 0.7rem;
-      letter-spacing: 0.18em;
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: #f5f3ef;
-      border-bottom: 1px solid rgba(245, 243, 239, 0.3);
-      padding-bottom: 4px;
+      color: var(--text-primary);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 3px;
       transition: border-color 0.3s ease;
     }
 
     .about__link:hover {
-      border-color: #f5f3ef;
+      border-color: var(--text-primary);
     }
 
     @media (max-width: 900px) {
       .about__grid {
         grid-template-columns: 1fr;
-        gap: 3rem;
+        gap: 2.5rem;
       }
       .about__img {
         aspect-ratio: 3/4;
-        max-width: 500px;
+        max-width: 420px;
       }
     }
 
-    /* ---------- FEATURED / COLLABORATIONS ---------- */
+    /* ============================================================
+       FEATURED / COLLABORATIONS
+       ============================================================ */
     .features {
-      background: #0a0a0a;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
-      padding: 5rem 0;
+      background: var(--bg);
+      border-top: 1px solid var(--border-soft);
+      padding: 3.5rem 0;
+      transition: background-color 0.5s ease, border-color 0.5s ease;
     }
 
     .features__header {
-      margin-bottom: 3rem;
+      margin-bottom: 2rem;
     }
 
     .features__header .label {
-      margin-bottom: 0.8rem;
+      margin-bottom: 0.6rem;
     }
 
     .features__header h2 {
-      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      font-size: clamp(1.2rem, 2vw, 1.6rem);
       line-height: 1.2;
-      color: #ede9e2;
+      color: var(--text-primary);
     }
 
     .features__list {
       display: flex;
       flex-wrap: wrap;
-      gap: 1.5rem 3rem;
+      gap: 1rem 2.4rem;
       align-items: center;
     }
 
     .features__item {
       font-family: 'Playfair Display', serif;
-      font-size: 1rem;
-      letter-spacing: 0.08em;
-      color: rgba(245, 243, 239, 0.4);
+      font-size: 0.85rem;
+      letter-spacing: 0.06em;
+      color: var(--text-faint);
       transition: color 0.3s ease;
     }
 
     .features__item:hover {
-      color: rgba(245, 243, 239, 0.8);
+      color: var(--text-secondary);
     }
 
-    /* ---------- JOURNAL ---------- */
-    .journal {
-      background: #0a0a0a;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    /* ============================================================
+       FROM TIKTOK
+       ============================================================ */
+    .tiktok {
+      background: var(--bg);
+      border-top: 1px solid var(--border-soft);
+      transition: background-color 0.5s ease, border-color 0.5s ease;
     }
 
-    .journal__header {
-      margin-bottom: 4rem;
+    .tiktok__header {
+      margin-bottom: 2.5rem;
       display: flex;
       justify-content: space-between;
       align-items: flex-end;
       flex-wrap: wrap;
-      gap: 1.5rem;
+      gap: 1.2rem;
     }
 
-    .journal__header .label {
-      margin-bottom: 1rem;
+    .tiktok__header .label {
+      margin-bottom: 0.8rem;
     }
 
-    .journal__header h2 {
-      font-size: clamp(2.8rem, 6vw, 5rem);
-      line-height: 1.1;
-      color: #ede9e2;
+    .tiktok__header h2 {
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      line-height: 1.15;
+      color: var(--text-primary);
     }
 
-    .journal__follow {
-      font-size: 0.7rem;
-      letter-spacing: 0.16em;
+    .tiktok__follow {
+      font-size: 0.62rem;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: #c9b28b;
-      border-bottom: 1px solid rgba(201, 178, 139, 0.4);
-      padding-bottom: 4px;
+      color: var(--accent);
+      border-bottom: 1px solid var(--accent-faint);
+      padding-bottom: 3px;
       transition: border-color 0.3s ease;
     }
 
-    .journal__follow:hover {
-      border-color: #c9b28b;
+    .tiktok__follow:hover {
+      border-color: var(--accent);
     }
 
-    .journal__grid {
+    .tiktok__grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2rem;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.4rem;
     }
 
-    .journal__item {
+    .tiktok__item {
       cursor: pointer;
+      display: block;
+      text-decoration: none;
+      color: inherit;
     }
 
-    .journal__item-img {
-      aspect-ratio: 4/5;
+    .tiktok__item-img {
+      aspect-ratio: 9/16;
       overflow: hidden;
-      margin-bottom: 1.2rem;
+      margin-bottom: 0.8rem;
+      background: var(--bg-elevated);
+      transition: background-color 0.5s ease;
     }
 
-    .journal__item-img img {
-      transition: transform 0.7s ease;
+    .tiktok__item-img img {
+      transition: transform 0.6s ease;
     }
 
-    .journal__item:hover .journal__item-img img {
-      transform: scale(1.04);
+    .tiktok__item:hover .tiktok__item-img img {
+      transform: scale(1.05);
     }
 
-    .journal__item-cat {
-      font-size: 0.6rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: #c9b28b;
-      margin-bottom: 0.4rem;
-    }
-
-    .journal__item-title {
+    .tiktok__item-title {
       font-family: 'Playfair Display', serif;
-      font-size: 1.15rem;
-      color: #ede9e2;
-      margin-bottom: 0.4rem;
+      font-size: 0.85rem;
+      color: var(--text-primary);
+      margin-bottom: 0.2rem;
       line-height: 1.3;
     }
 
-    .journal__item-date {
-      font-size: 0.7rem;
-      letter-spacing: 0.1em;
-      color: rgba(245, 243, 239, 0.4);
+    .tiktok__item-watch {
+      font-size: 0.55rem;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
+      color: var(--accent);
+      transition: letter-spacing 0.3s ease;
     }
 
-    @media (max-width: 900px) {
-      .journal__grid {
+    .tiktok__item:hover .tiktok__item-watch {
+      letter-spacing: 0.24em;
+    }
+
+    @media (max-width: 1000px) {
+      .tiktok__grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 700px) {
+      .tiktok__grid {
         grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
       }
     }
 
-    @media (max-width: 500px) {
-      .journal__grid {
+    @media (max-width: 450px) {
+      .tiktok__grid {
         grid-template-columns: 1fr;
-        gap: 2.5rem;
+        gap: 1.5rem;
+        max-width: 240px;
       }
     }
 
-    /* ---------- TESTIMONIAL ---------- */
+    /* ============================================================
+       TESTIMONIAL
+       ============================================================ */
     .testimonial {
-      background: #0a0a0a;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
-      padding: 7rem 0;
+      background: var(--bg);
+      border-top: 1px solid var(--border-soft);
+      padding: 5rem 0;
       text-align: center;
+      transition: background-color 0.5s ease, border-color 0.5s ease;
     }
 
     .testimonial__quote {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(1.8rem, 3.5vw, 3rem);
-      line-height: 1.3;
-      color: #ede9e2;
-      max-width: 900px;
-      margin: 0 auto 2rem;
+      font-size: clamp(1.2rem, 2.2vw, 1.8rem);
+      line-height: 1.4;
+      color: var(--text-primary);
+      max-width: 680px;
+      margin: 0 auto 1.6rem;
       font-style: italic;
       font-weight: 400;
       position: relative;
@@ -1150,33 +1341,35 @@
     .testimonial__quote::before {
       content: '\201C';
       font-family: 'Playfair Display', serif;
-      font-size: 6rem;
-      color: #c9b28b;
-      opacity: 0.25;
+      font-size: 4rem;
+      color: var(--accent);
+      opacity: 0.2;
       position: absolute;
-      top: -3.5rem;
+      top: -2.4rem;
       left: 50%;
       transform: translateX(-50%);
       line-height: 1;
     }
 
     .testimonial__author {
-      font-size: 0.7rem;
-      letter-spacing: 0.18em;
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: rgba(245, 243, 239, 0.45);
+      color: var(--text-faint);
     }
 
-    /* ---------- FINAL CTA ---------- */
+    /* ============================================================
+       FINAL CTA
+       ============================================================ */
     .final-cta {
       position: relative;
-      min-height: 70vh;
+      min-height: 55vh;
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
       overflow: hidden;
-      background: #0a0a0a;
+      background: var(--bg);
       padding: 0;
     }
 
@@ -1193,6 +1386,10 @@
       filter: brightness(0.35) contrast(1.1);
     }
 
+    [data-theme="light"] .final-cta__bg img {
+      filter: brightness(0.7) contrast(1.05);
+    }
+
     .final-cta__overlay {
       position: absolute;
       inset: 0;
@@ -1200,90 +1397,121 @@
       z-index: 2;
     }
 
+    [data-theme="light"] .final-cta__overlay {
+      background: rgba(247, 245, 241, 0.55);
+    }
+
     .final-cta__content {
       position: relative;
       z-index: 3;
-      padding: 6rem 5vw;
-      max-width: 800px;
+      padding: 5rem 5vw;
+      max-width: 620px;
     }
 
     .final-cta__title {
-      font-size: clamp(2.8rem, 7vw, 5.5rem);
-      line-height: 1.05;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      line-height: 1.12;
+      color: var(--text-primary);
+      margin-bottom: 1.2rem;
+      letter-spacing: -0.015em;
+    }
+
+    [data-theme="dark"] .final-cta__title {
       color: #f5f3ef;
-      margin-bottom: 1.5rem;
-      letter-spacing: -0.02em;
     }
 
     .final-cta__text {
-      font-size: 1rem;
+      font-size: 0.88rem;
       line-height: 1.8;
-      color: rgba(245, 243, 239, 0.7);
-      margin-bottom: 2.5rem;
+      color: var(--text-secondary);
+      margin-bottom: 2rem;
+    }
+
+    [data-theme="dark"] .final-cta__text {
+      color: rgba(245, 243, 239, 0.65);
     }
 
     .final-cta__actions {
       display: flex;
-      gap: 1rem;
+      gap: 0.8rem;
       justify-content: center;
       flex-wrap: wrap;
     }
 
-    /* ---------- FOOTER ---------- */
+    [data-theme="light"] .final-cta .btn {
+      border-color: rgba(26, 24, 21, 0.4);
+      color: var(--text-primary);
+    }
+
+    [data-theme="light"] .final-cta .btn--solid {
+      background: #1a1815;
+      color: #f7f5f1;
+      border-color: #1a1815;
+    }
+
+    [data-theme="light"] .final-cta .btn--solid:hover {
+      background: transparent;
+      color: var(--text-primary);
+    }
+
+    /* ============================================================
+       FOOTER
+       ============================================================ */
     .footer {
-      background: #0a0a0a;
-      border-top: 1px solid rgba(255, 255, 255, 0.06);
-      padding: 4rem 0 2rem;
+      background: var(--bg);
+      border-top: 1px solid var(--border-soft);
+      padding: 3rem 0 1.5rem;
+      transition: background-color 0.5s ease, border-color 0.5s ease;
     }
 
     .footer__grid {
       display: grid;
       grid-template-columns: 2fr 1fr 1fr 1fr;
-      gap: 3rem;
-      margin-bottom: 3rem;
+      gap: 2.4rem;
+      margin-bottom: 2.4rem;
     }
 
     .footer__brand {
       font-family: 'Playfair Display', serif;
-      font-size: 1.6rem;
-      color: #ede9e2;
-      margin-bottom: 0.6rem;
+      font-size: 1.3rem;
+      color: var(--text-primary);
+      margin-bottom: 0.5rem;
     }
 
     .footer__tagline {
-      font-size: 0.8rem;
-      color: rgba(245, 243, 239, 0.45);
+      font-size: 0.72rem;
+      color: var(--text-faint);
       letter-spacing: 0.05em;
     }
 
     .footer__heading {
-      font-size: 0.65rem;
-      letter-spacing: 0.18em;
+      font-size: 0.58rem;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: rgba(245, 243, 239, 0.4);
-      margin-bottom: 1.2rem;
+      color: var(--text-faint);
+      margin-bottom: 1rem;
     }
 
     .footer__links {
       list-style: none;
       display: flex;
       flex-direction: column;
-      gap: 0.7rem;
+      gap: 0.55rem;
     }
 
     .footer__links a {
-      font-size: 0.85rem;
-      color: rgba(245, 243, 239, 0.65);
+      font-size: 0.78rem;
+      color: var(--text-tertiary);
       transition: color 0.25s ease;
     }
 
     .footer__links a:hover {
-      color: #f5f3ef;
+      color: var(--text-primary);
     }
 
     .footer__bottom {
-      padding-top: 2rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding-top: 1.6rem;
+      border-top: 1px solid var(--border-soft);
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -1292,32 +1520,34 @@
     }
 
     .footer__copy {
-      font-size: 0.65rem;
-      letter-spacing: 0.12em;
+      font-size: 0.58rem;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: rgba(245, 243, 239, 0.35);
+      color: var(--text-faint);
     }
 
     @media (max-width: 900px) {
       .footer__grid {
         grid-template-columns: 1fr 1fr;
-        gap: 2.5rem;
+        gap: 2rem;
       }
     }
 
     @media (max-width: 500px) {
       .footer__grid {
         grid-template-columns: 1fr;
-        gap: 2rem;
+        gap: 1.6rem;
       }
     }
 
-    /* ---------- SCROLL REVEAL ---------- */
+    /* ============================================================
+       SCROLL REVEAL
+       ============================================================ */
     .reveal {
       opacity: 0;
-      transform: translateY(40px);
-      transition: opacity 1s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-        transform 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      transform: translateY(30px);
+      transition: opacity 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+        transform 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
 
     .reveal.visible {
@@ -1325,7 +1555,197 @@
       transform: translateY(0);
     }
 
-    /* ---------- RESPONSIVE NAV ---------- */
+    /* ============================================================
+       PROJECT DETAIL PAGE STYLES
+       ============================================================ */
+    .project-page {
+      background: var(--bg);
+      min-height: 100vh;
+      padding: 6rem 0 3rem;
+      display: none;
+      transition: background-color 0.5s ease;
+    }
+
+    .project-page.active {
+      display: block;
+    }
+
+    .project-page__header {
+      margin-bottom: 2.4rem;
+    }
+
+    .project-page__back {
+      display: inline-block;
+      font-size: 0.62rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      margin-bottom: 2.4rem;
+      border-bottom: 1px solid transparent;
+      padding-bottom: 3px;
+      transition: color 0.3s ease, border-color 0.3s ease;
+      cursor: pointer;
+      background: none;
+      border-top: none;
+      border-left: none;
+      border-right: none;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .project-page__back:hover {
+      color: var(--text-primary);
+      border-color: var(--border);
+    }
+
+    .project-page__title {
+      font-size: clamp(1.8rem, 4.5vw, 3.2rem);
+      line-height: 1.1;
+      color: var(--text-primary);
+      margin-bottom: 0.6rem;
+      letter-spacing: -0.02em;
+    }
+
+    .project-page__meta {
+      font-size: 0.7rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.6rem;
+    }
+
+    .project-page__desc {
+      font-size: 0.88rem;
+      line-height: 1.8;
+      color: var(--text-tertiary);
+      max-width: 480px;
+      margin-bottom: 3rem;
+    }
+
+    .project-page__gallery {
+      display: flex;
+      flex-direction: column;
+      gap: 1.4rem;
+    }
+
+    .project-page__row {
+      display: flex;
+      gap: 1.4rem;
+      align-items: flex-end;
+    }
+
+    .project-page__row--full {
+      display: block;
+    }
+
+    .project-page__row--split {
+      display: grid;
+      grid-template-columns: 1fr 1.6fr;
+      gap: 1.4rem;
+      align-items: start;
+    }
+
+    .project-page__row--split-reverse {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr;
+      gap: 1.4rem;
+      align-items: end;
+    }
+
+    .project-page__row--duo {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.4rem;
+      align-items: start;
+    }
+
+    .project-page__img {
+      overflow: hidden;
+      width: 100%;
+    }
+
+    .project-page__img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s ease;
+    }
+
+    .project-page__img:hover img {
+      transform: scale(1.02);
+    }
+
+    .project-page__img--large {
+      aspect-ratio: 16/10;
+    }
+
+    .project-page__img--small {
+      aspect-ratio: 4/5;
+      max-width: 260px;
+    }
+
+    .project-page__img--medium {
+      aspect-ratio: 3/4;
+      max-width: 340px;
+    }
+
+    .project-page__img--wide {
+      aspect-ratio: 21/9;
+    }
+
+    .project-page__img--square {
+      aspect-ratio: 1/1;
+    }
+
+    .project-page__img--portrait {
+      aspect-ratio: 3/4;
+    }
+
+    @media (max-width: 900px) {
+      .project-page__row--split,
+      .project-page__row--split-reverse,
+      .project-page__row--duo {
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
+      }
+      .project-page__img--small,
+      .project-page__img--medium {
+        max-width: 100%;
+      }
+      .project-page__img--large {
+        aspect-ratio: 4/3;
+      }
+      .project-page__img--wide {
+        aspect-ratio: 16/9;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .project-page {
+        padding: 5rem 0 2.5rem;
+      }
+      .project-page__title {
+        font-size: 1.5rem;
+      }
+      .project-page__gallery {
+        gap: 1rem;
+      }
+      .project-page__row {
+        gap: 0.8rem;
+      }
+    }
+
+    /* ============================================================
+       RESPONSIVE NAV
+       ============================================================ */
+    @media (max-width: 1000px) {
+      .nav__links {
+        gap: 1.4rem;
+      }
+      .nav__links a {
+        font-size: 0.58rem;
+      }
+    }
+
     @media (max-width: 900px) {
       .nav__links,
       .nav__cta {
@@ -1337,12 +1757,45 @@
       .mobile-menu {
         display: flex;
       }
+      .theme-toggle {
+        width: 34px;
+        height: 34px;
+      }
+      .theme-toggle svg {
+        width: 14px;
+        height: 14px;
+      }
+      .nav__actions {
+        gap: 0.6rem;
+      }
     }
 
     @media (min-width: 901px) {
       .mobile-menu {
         display: none !important;
       }
+    }
+
+    /* Mobile theme toggle inside mobile menu */
+    .mobile-menu__theme {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-primary);
+      margin-top: 1rem;
+      cursor: pointer;
+      background: none;
+      border: 1px solid var(--border);
+      padding: 0.7rem 1.4rem;
+      font-family: 'Inter', sans-serif;
+      transition: border-color 0.3s ease;
+    }
+
+    .mobile-menu__theme:hover {
+      border-color: var(--accent-faint);
     }
   </style>
 </head>
@@ -1351,379 +1804,655 @@
   <!-- ========== NAVIGATION ========== -->
   <nav class="nav" id="nav">
     <div class="nav__inner">
-      <a href="#" class="nav__logo">STYLISTLK</a>
+      <a href="#" class="nav__logo" onclick="showHome()">STYLISTLK</a>
       <div class="nav__links">
-        <a href="#">HOME</a>
+        <a href="#" onclick="showHome()">HOME</a>
         <a href="#about">ABOUT</a>
         <a href="#services">SERVICES</a>
         <a href="#work">WORK</a>
-        <a href="#journal">JOURNAL</a>
+        <a href="#tiktok">FROM TIKTOK</a>
       </div>
-      <a href="#contact" class="nav__cta">BOOK A CONSULTATION</a>
-      <button class="nav__hamburger" id="hamburger" aria-label="Menu">
-        <span></span><span></span><span></span>
-      </button>
+      <div class="nav__actions">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+          <!-- Moon icon (shown in dark mode) -->
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          </svg>
+          <!-- Sun icon (shown in light mode) -->
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="4"/>
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+          </svg>
+        </button>
+        <a href="#contact" class="nav__cta">BOOK A CONSULTATION</a>
+        <button class="nav__hamburger" id="hamburger" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
     </div>
   </nav>
 
   <!-- Mobile Menu -->
   <div class="mobile-menu" id="mobileMenu">
-    <a href="#" onclick="closeMenu()">HOME</a>
+    <a href="#" onclick="closeMenu(); showHome()">HOME</a>
     <a href="#about" onclick="closeMenu()">ABOUT</a>
     <a href="#services" onclick="closeMenu()">SERVICES</a>
     <a href="#work" onclick="closeMenu()">WORK</a>
-    <a href="#journal" onclick="closeMenu()">JOURNAL</a>
+    <a href="#tiktok" onclick="closeMenu()">FROM TIKTOK</a>
     <a href="#contact" class="nav__cta" onclick="closeMenu()">BOOK A CONSULTATION</a>
+    <button class="mobile-menu__theme" onclick="toggleTheme()">
+      <span id="mobileThemeLabel">LIGHT MODE</span>
+    </button>
   </div>
 
-  <!-- ========== HERO ========== -->
-  <section class="hero">
-    <div class="hero__bg">
-      <img
-        src="https://images.unsplash.com/photo-1509631179647-0177331693ae?q=80&w=2070&auto=format&fit=crop"
-        alt="Editorial fashion photography — dramatic silhouette"
-      />
-    </div>
-    <div class="hero__overlay"></div>
-    <div class="hero__content">
-      <p class="hero__label label label--gold">FASHION STYLIST • SRI LANKA</p>
-      <h1 class="hero__title serif">
-        <span>STYLE</span>
-        <span>THAT SPEAKS</span>
-        <span>BEFORE YOU DO.</span>
-      </h1>
-      <p class="hero__desc">
-        Personal styling, fashion direction and image curation for individuals,
-        brands and special occasions.
-      </p>
-      <div class="hero__actions">
-        <a href="#contact" class="btn btn--solid">BOOK A CONSULTATION</a>
-        <a href="#work" class="btn">VIEW MY WORK</a>
-      </div>
-    </div>
-    <div class="hero__scroll">
-      SCROLL TO EXPLORE <span>↓</span>
-    </div>
-  </section>
+  <!-- ========== HOMEPAGE ========== -->
+  <div id="homepage">
 
-  <!-- ========== INTRO ========== -->
-  <section class="intro" id="intro">
+    <!-- ========== HERO ========== -->
+    <section class="hero">
+      <div class="hero__bg">
+        <img
+          src="https://images.unsplash.com/photo-1509631179647-0177331693ae?q=80&w=2070&auto=format&fit=crop"
+          alt="Editorial fashion photography — dramatic silhouette"
+        />
+      </div>
+      <div class="hero__overlay"></div>
+      <div class="hero__content">
+        <p class="hero__label label label--gold">FASHION STYLIST • SRI LANKA</p>
+        <h1 class="hero__title serif">
+          <span>STYLE</span>
+          <span>THAT SPEAKS</span>
+          <span>BEFORE YOU DO.</span>
+        </h1>
+        <p class="hero__desc">
+          Personal styling, fashion direction and image curation for individuals,
+          brands and special occasions.
+        </p>
+        <div class="hero__actions">
+          <a href="#contact" class="btn btn--solid">BOOK A CONSULTATION</a>
+          <a href="#work" class="btn">VIEW MY WORK</a>
+        </div>
+      </div>
+      <div class="hero__scroll">
+        SCROLL TO EXPLORE <span>↓</span>
+      </div>
+    </section>
+
+    <!-- ========== INTRO / ABOUT / APPROACH ========== -->
+    <section class="intro" id="intro">
+      <div class="container">
+        <div class="intro__grid reveal">
+          <div class="intro__left">
+            <p class="label">THE STYLISTLK APPROACH</p>
+            <h2 class="intro__headline serif">
+              Your clothes are only<br />part of the story.
+            </h2>
+          </div>
+          <div class="intro__right">
+            <p>
+              Style is about more than what you wear. It's about how you present
+              yourself, how you feel, and how you're remembered.
+            </p>
+            <p>
+              STYLISTLK helps individuals and brands create a distinctive visual
+              identity through thoughtful styling, fashion direction and carefully
+              curated looks.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== SERVICES (Editorial Card Grid) ========== -->
+    <section class="services" id="services">
+      <div class="container">
+        <div class="services__header reveal">
+          <p class="label">WHAT I DO</p>
+          <h2 class="serif">SERVICES</h2>
+        </div>
+        <div class="services__grid">
+          <div class="service-card reveal">
+            <div class="service-card__top">
+              <span class="service-card__num">01</span>
+              <span class="service-card__icon">↗</span>
+            </div>
+            <div>
+              <h3 class="service-card__title serif">PERSONAL STYLING</h3>
+              <p class="service-card__desc">Build a wardrobe and personal image that feels intentional, authentic and uniquely yours.</p>
+            </div>
+          </div>
+
+          <div class="service-card reveal">
+            <div class="service-card__top">
+              <span class="service-card__num">02</span>
+              <span class="service-card__icon">↗</span>
+            </div>
+            <div>
+              <h3 class="service-card__title serif">EVENT & OCCASION STYLING</h3>
+              <p class="service-card__desc">From intimate celebrations to major events, create a look that belongs in the room.</p>
+            </div>
+          </div>
+
+          <div class="service-card reveal">
+            <div class="service-card__top">
+              <span class="service-card__num">03</span>
+              <span class="service-card__icon">↗</span>
+            </div>
+            <div>
+              <h3 class="service-card__title serif">FASHION DIRECTION</h3>
+              <p class="service-card__desc">Visual direction and styling for campaigns, editorial shoots, brands and creative projects.</p>
+            </div>
+          </div>
+
+          <div class="service-card reveal">
+            <div class="service-card__top">
+              <span class="service-card__num">04</span>
+              <span class="service-card__icon">↗</span>
+            </div>
+            <div>
+              <h3 class="service-card__title serif">SHOPPING ASSISTANCE</h3>
+              <p class="service-card__desc">Curated shopping support to find pieces that work with your style, personality and occasion.</p>
+            </div>
+          </div>
+
+          <div class="service-card service-card--wide reveal">
+            <div class="service-card__top">
+              <span class="service-card__num">05</span>
+              <span class="service-card__icon">↗</span>
+            </div>
+            <div>
+              <h3 class="service-card__title serif">EDITORIAL & CONTENT STYLING</h3>
+              <p class="service-card__desc">Create cohesive fashion stories for photography, social media and editorial content — from concept to final look.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== SELECTED CLIENTS ========== -->
+    <section class="clients" id="clients">
+      <div class="container">
+        <div class="clients__header reveal">
+          <p class="label">SELECTED CLIENTS</p>
+          <h2 class="serif">WORKED WITH</h2>
+        </div>
+        <div class="clients__list reveal">
+          <span class="client-item">
+            BRAND NAME
+            <span class="client-item__preview"><img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=200&auto=format&fit=crop" alt=""></span>
+          </span>
+          <span class="client-item">
+            BRAND NAME
+            <span class="client-item__preview"><img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?q=80&w=200&auto=format&fit=crop" alt=""></span>
+          </span>
+          <span class="client-item">
+            BRAND NAME
+            <span class="client-item__preview"><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop" alt=""></span>
+          </span>
+          <span class="client-item">
+            BRAND NAME
+            <span class="client-item__preview"><img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?q=80&w=200&auto=format&fit=crop" alt=""></span>
+          </span>
+          <span class="client-item">
+            BRAND NAME
+            <span class="client-item__preview"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&auto=format&fit=crop" alt=""></span>
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== SELECTED WORK (typography-led list) ========== -->
+    <section class="work" id="work">
+      <div class="container">
+        <div class="work__header reveal">
+          <p class="label">SELECTED WORK</p>
+          <h2 class="serif">PROJECTS</h2>
+        </div>
+        <div class="work__list">
+
+          <a href="#" class="work-item reveal" onclick="openProject(event, 'project-1')">
+            <span class="work-item__num">01</span>
+            <span class="work-item__title-block">
+              <span class="work-item__title serif">BRAND / PROJECT NAME</span>
+              <span class="work-item__cat">Styling / Creative Direction</span>
+            </span>
+            <span class="work-item__arrow">→</span>
+            <span class="work-item__preview">
+              <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop" alt="">
+            </span>
+          </a>
+
+          <a href="#" class="work-item reveal" onclick="openProject(event, 'project-2')">
+            <span class="work-item__num">02</span>
+            <span class="work-item__title-block">
+              <span class="work-item__title serif">BRAND / PROJECT NAME</span>
+              <span class="work-item__cat">Fashion Styling</span>
+            </span>
+            <span class="work-item__arrow">→</span>
+            <span class="work-item__preview">
+              <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?q=80&w=200&auto=format&fit=crop" alt="">
+            </span>
+          </a>
+
+          <a href="#" class="work-item reveal" onclick="openProject(event, 'project-3')">
+            <span class="work-item__num">03</span>
+            <span class="work-item__title-block">
+              <span class="work-item__title serif">BRAND / PROJECT NAME</span>
+              <span class="work-item__cat">Editorial / Campaign</span>
+            </span>
+            <span class="work-item__arrow">→</span>
+            <span class="work-item__preview">
+              <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=200&auto=format&fit=crop" alt="">
+            </span>
+          </a>
+
+          <a href="#" class="work-item reveal" onclick="openProject(event, 'project-4')">
+            <span class="work-item__num">04</span>
+            <span class="work-item__title-block">
+              <span class="work-item__title serif">BRAND / PROJECT NAME</span>
+              <span class="work-item__cat">Personal Styling</span>
+            </span>
+            <span class="work-item__arrow">→</span>
+            <span class="work-item__preview">
+              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&auto=format&fit=crop" alt="">
+            </span>
+          </a>
+
+          <a href="#" class="work-item reveal" onclick="openProject(event, 'project-5')">
+            <span class="work-item__num">05</span>
+            <span class="work-item__title-block">
+              <span class="work-item__title serif">BRAND / PROJECT NAME</span>
+              <span class="work-item__cat">Creative Direction</span>
+            </span>
+            <span class="work-item__arrow">→</span>
+            <span class="work-item__preview">
+              <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=200&auto=format&fit=crop" alt="">
+            </span>
+          </a>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== EDITORIAL FEATURE ========== -->
+    <section class="editorial-feature">
+      <div class="editorial-feature__bg">
+        <img
+          src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?q=80&w=2070&auto=format&fit=crop"
+          alt="Editorial fashion spread"
+        />
+      </div>
+      <div class="editorial-feature__overlay"></div>
+      <div class="editorial-feature__content reveal">
+        <h2 class="editorial-feature__title serif">
+          STYLE IS<br />A FORM OF<br />COMMUNICATION.
+        </h2>
+        <p class="editorial-feature__text">
+          The right look doesn't simply make an impression. It tells people
+          something about who you are before you say a word.
+        </p>
+        <a href="#tiktok" class="editorial-feature__link">EXPLORE FROM TIKTOK →</a>
+      </div>
+    </section>
+
+    <!-- ========== ABOUT ========== -->
+    <section class="about" id="about">
+      <div class="container">
+        <div class="about__grid">
+          <div class="about__img reveal">
+            <img
+              src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?q=80&w=1974&auto=format&fit=crop"
+              alt="Portrait of the stylist"
+            />
+          </div>
+          <div class="about__content reveal">
+            <p class="label">ABOUT STYLISTLK</p>
+            <h2 class="about__title serif">
+              STYLE, CURATED<br />WITH INTENTION.
+            </h2>
+            <p class="about__text">
+              STYLISTLK is a fashion styling practice built on the belief that
+              how you present yourself is a form of self-expression. Every look
+              is considered — never accidental.
+            </p>
+            <p class="about__text">
+              Working across personal styling, editorial direction and event
+              dressing, the approach is always collaborative, discreet and
+              tailored to the individual.
+            </p>
+            <p class="about__location">Based in Sri Lanka.</p>
+            <a href="#" class="about__link">MORE ABOUT STYLISTLK →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== FEATURED / COLLABORATIONS ========== -->
+    <section class="features">
+      <div class="container">
+        <div class="features__header reveal">
+          <p class="label">FEATURED / COLLABORATIONS</p>
+          <h2 class="serif">SELECTED FEATURES</h2>
+        </div>
+        <div class="features__list reveal">
+          <span class="features__item">PUBLICATION NAME</span>
+          <span class="features__item">BRAND NAME</span>
+          <span class="features__item">EVENT NAME</span>
+          <span class="features__item">COLLABORATION</span>
+          <span class="features__item">FASHION HOUSE</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== FROM TIKTOK ========== -->
+    <section class="tiktok" id="tiktok">
+      <div class="container">
+        <div class="tiktok__header reveal">
+          <div>
+            <p class="label">FROM TIKTOK</p>
+            <h2 class="serif">WATCH & FOLLOW</h2>
+          </div>
+          <a href="#" class="tiktok__follow">FOLLOW @STYLISTLK →</a>
+        </div>
+        <div class="tiktok__grid">
+          <a href="#" class="tiktok__item reveal">
+            <div class="tiktok__item-img">
+              <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=1080&auto=format&fit=crop" alt="TikTok video thumbnail" />
+            </div>
+            <p class="tiktok__item-title serif">Styling a monochrome look</p>
+            <p class="tiktok__item-watch">WATCH ON TIKTOK →</p>
+          </a>
+          <a href="#" class="tiktok__item reveal">
+            <div class="tiktok__item-img">
+              <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?q=80&w=1080&auto=format&fit=crop" alt="TikTok video thumbnail" />
+            </div>
+            <p class="tiktok__item-title serif">Behind the scenes editorial</p>
+            <p class="tiktok__item-watch">WATCH ON TIKTOK →</p>
+          </a>
+          <a href="#" class="tiktok__item reveal">
+            <div class="tiktok__item-img">
+              <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1080&auto=format&fit=crop" alt="TikTok video thumbnail" />
+            </div>
+            <p class="tiktok__item-title serif">Event look breakdown</p>
+            <p class="tiktok__item-watch">WATCH ON TIKTOK →</p>
+          </a>
+          <a href="#" class="tiktok__item reveal">
+            <div class="tiktok__item-img">
+              <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=1080&auto=format&fit=crop" alt="TikTok video thumbnail" />
+            </div>
+            <p class="tiktok__item-title serif">Wardrobe essentials</p>
+            <p class="tiktok__item-watch">WATCH ON TIKTOK →</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== TESTIMONIAL ========== -->
+    <section class="testimonial">
+      <div class="container reveal">
+        <blockquote class="testimonial__quote serif">
+          Working with STYLISTLK completely changed the way I approached my wardrobe.
+        </blockquote>
+        <p class="testimonial__author">— CLIENT NAME</p>
+      </div>
+    </section>
+
+    <!-- ========== FINAL CTA ========== -->
+    <section class="final-cta" id="contact">
+      <div class="final-cta__bg">
+        <img
+          src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=2070&auto=format&fit=crop"
+          alt="Editorial background"
+        />
+      </div>
+      <div class="final-cta__overlay"></div>
+      <div class="final-cta__content reveal">
+        <h2 class="final-cta__title serif">
+          READY TO<br />DEFINE YOUR STYLE?
+        </h2>
+        <p class="final-cta__text">
+          Let's create a look that feels unmistakably yours.
+        </p>
+        <div class="final-cta__actions">
+          <a href="#" class="btn btn--solid">BOOK A CONSULTATION →</a>
+          <a href="#" class="btn">CONTACT →</a>
+        </div>
+      </div>
+    </section>
+
+  </div><!-- /homepage -->
+
+  <!-- ========== PROJECT PAGES ========== -->
+
+  <!-- Project 1 -->
+  <div id="project-1" class="project-page">
     <div class="container">
-      <div class="intro__grid reveal">
-        <div class="intro__left">
-          <p class="label">THE STYLISTLK APPROACH</p>
-          <h2 class="intro__headline serif">
-            Your clothes are only<br />part of the story.
-          </h2>
+      <button class="project-page__back" onclick="showHome()">← BACK TO WORK</button>
+      <div class="project-page__header">
+        <p class="label">PROJECT 01</p>
+        <h1 class="project-page__title serif">BRAND / PROJECT NAME</h1>
+        <p class="project-page__meta">Styling / Creative Direction</p>
+        <p class="project-page__desc">
+          A short project description. Placeholder text describing the creative direction, styling approach, and visual outcome. Replace with actual project details.
+        </p>
+      </div>
+      <div class="project-page__gallery">
+        <div class="project-page__row project-page__row--full">
+          <div class="project-page__img project-page__img--large">
+            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=2070&auto=format&fit=crop" alt="Project image" />
+          </div>
         </div>
-        <div class="intro__right">
-          <p>
-            Style is about more than what you wear. It's about how you present
-            yourself, how you feel, and how you're remembered.
-          </p>
-          <p>
-            STYLISTLK helps individuals and brands create a distinctive visual
-            identity through thoughtful styling, fashion direction and carefully
-            curated looks.
-          </p>
+        <div class="project-page__row project-page__row--split">
+          <div class="project-page__img project-page__img--small">
+            <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=800&auto=format&fit=crop" alt="Project image" />
+          </div>
+          <div class="project-page__img project-page__img--medium">
+            <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?q=80&w=1200&auto=format&fit=crop" alt="Project image" />
+          </div>
+        </div>
+        <div class="project-page__row project-page__row--full">
+          <div class="project-page__img project-page__img--wide">
+            <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?q=80&w=2070&auto=format&fit=crop" alt="Project image" />
+          </div>
+        </div>
+        <div class="project-page__row project-page__row--duo">
+          <div class="project-page__img project-page__img--medium">
+            <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?q=80&w=1200&auto=format&fit=crop" alt="Project image" />
+          </div>
+          <div class="project-page__img project-page__img--medium">
+            <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=1200&auto=format&fit=crop" alt="Project image" />
+          </div>
         </div>
       </div>
+      <div style="margin-top: 3rem;">
+        <button class="project-page__back" onclick="showHome()">← BACK TO WORK</button>
+      </div>
     </div>
-  </section>
+  </div>
 
-  <!-- ========== SERVICES ========== -->
-  <section class="services" id="services">
+  <!-- Project 2 -->
+  <div id="project-2" class="project-page">
     <div class="container">
-      <div class="services__header reveal">
-        <p class="label">WHAT I DO</p>
-        <h2 class="serif">SERVICES</h2>
+      <button class="project-page__back" onclick="showHome()">← BACK TO WORK</button>
+      <div class="project-page__header">
+        <p class="label">PROJECT 02</p>
+        <h1 class="project-page__title serif">BRAND / PROJECT NAME</h1>
+        <p class="project-page__meta">Fashion Styling</p>
+        <p class="project-page__desc">
+          A short project description. Placeholder text describing the creative direction, styling approach, and visual outcome. Replace with actual project details.
+        </p>
       </div>
-      <div class="services__list">
-        <div class="service-item reveal">
-          <span class="service-item__num">01</span>
-          <span class="service-item__title serif">PERSONAL STYLING</span>
-          <span class="service-item__desc">Build a wardrobe and personal image that feels intentional, authentic and uniquely yours.</span>
-          <span class="service-item__arrow">→</span>
+      <div class="project-page__gallery">
+        <div class="project-page__row project-page__row--full">
+          <div class="project-page__img project-page__img--large">
+            <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?q=80&w=2070&auto=format&fit=crop" alt="Project image" />
+          </div>
         </div>
-        <div class="service-item reveal">
-          <span class="service-item__num">02</span>
-          <span class="service-item__title serif">EVENT & OCCASION STYLING</span>
-          <span class="service-item__desc">From intimate celebrations to major events, create a look that belongs in the room.</span>
-          <span class="service-item__arrow">→</span>
+        <div class="project-page__row project-page__row--split-reverse">
+          <div class="project-page__img project-page__img--medium">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1200&auto=format&fit=crop" alt="Project image" />
+          </div>
+          <div class="project-page__img project-page__img--small">
+            <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=800&auto=format&fit=crop" alt="Project image" />
+          </div>
         </div>
-        <div class="service-item reveal">
-          <span class="service-item__num">03</span>
-          <span class="service-item__title serif">FASHION DIRECTION</span>
-          <span class="service-item__desc">Visual direction and styling for campaigns, editorial shoots, brands and creative projects.</span>
-          <span class="service-item__arrow">→</span>
+        <div class="project-page__row project-page__row--full">
+          <div class="project-page__img project-page__img--wide">
+            <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=2070&auto=format&fit=crop" alt="Project image" />
+          </div>
         </div>
-        <div class="service-item reveal">
-          <span class="service-item__num">04</span>
-          <span class="service-item__title serif">SHOPPING ASSISTANCE</span>
-          <span class="service-item__desc">Curated shopping support to find pieces that work with your style, personality and occasion.</span>
-          <span class="service-item__arrow">→</span>
+        <div class="project-page__row project-page__row--duo">
+          <div class="project-page__img project-page__img--square">
+            <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=1000&auto=format&fit=crop" alt="Project image" />
+          </div>
+          <div class="project-page__img project-page__img--square">
+            <img src="https://images.unsplash.com/photo-1475721027785-f74eccf877e2?q=80&w=1000&auto=format&fit=crop" alt="Project image" />
+          </div>
         </div>
-        <div class="service-item reveal">
-          <span class="service-item__num">05</span>
-          <span class="service-item__title serif">EDITORIAL & CONTENT STYLING</span>
-          <span class="service-item__desc">Create cohesive fashion stories for photography, social media and editorial content.</span>
-          <span class="service-item__arrow">→</span>
-        </div>
+      </div>
+      <div style="margin-top: 3rem;">
+        <button class="project-page__back" onclick="showHome()">← BACK TO WORK</button>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- ========== FEATURED WORK ========== -->
-  <section class="work" id="work">
+  <!-- Project 3 -->
+  <div id="project-3" class="project-page">
     <div class="container">
-      <div class="work__header reveal">
-        <p class="label">SELECTED WORK</p>
-        <h2 class="serif">PORTFOLIO</h2>
+      <button class="project-page__back" onclick="showHome()">← BACK TO WORK</button>
+      <div class="project-page__header">
+        <p class="label">PROJECT 03</p>
+        <h1 class="project-page__title serif">BRAND / PROJECT NAME</h1>
+        <p class="project-page__meta">Editorial / Campaign</p>
+        <p class="project-page__desc">
+          A short project description. Placeholder text describing the creative direction, styling approach, and visual outcome. Replace with actual project details.
+        </p>
+      </div>
+      <div class="project-page__gallery">
+        <div class="project-page__row project-page__row--full">
+          <div class="project-page__img project-page__img--large">
+            <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=2070&auto=format&fit=crop" alt="Project image" />
+          </div>
+        </div>
+        <div class="project-page__row project-page__row--split">
+          <div class="project-page__img project-page__img--small">
+            <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?q=80&w=800&auto=format&fit=crop" alt="Project image" />
+          </div>
+          <div class="project-page__img project-page__img--portrait">
+            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1000&auto=format&fit=crop" alt="Project image" />
+          </div>
+        </div>
+        <div class="project-page__row project-page__row--full">
+          <div class="project-page__img project-page__img--wide">
+            <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?q=80&w=2070&auto=format&fit=crop" alt="Project image" />
+          </div>
+        </div>
+        <div class="project-page__row project-page__row--duo">
+          <div class="project-page__img project-page__img--medium">
+            <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?q=80&w=1200&auto=format&fit=crop" alt="Project image" />
+          </div>
+          <div class="project-page__img project-page__img--medium">
+            <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=1200&auto=format&fit=crop" alt="Project image" />
+          </div>
+        </div>
+      </div>
+      <div style="margin-top: 3rem;">
+        <button class="project-page__back" onclick="showHome()">← BACK TO WORK</button>
       </div>
     </div>
+  </div>
+
+  <!-- Project 4 -->
+  <div id="project-4" class="project-page">
     <div class="container">
-      <div class="work__grid">
-        <div class="work-item work-item--a reveal">
-          <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=2070&auto=format&fit=crop" alt="Event Editorial" />
-          <div class="work-item__overlay">
-            <span class="work-item__cat">EVENT EDITORIAL</span>
-            <span class="work-item__title serif">Evening Drama</span>
-            <span class="work-item__link">VIEW PROJECT →</span>
+      <button class="project-page__back" onclick="showHome()">← BACK TO WORK</button>
+      <div class="project-page__header">
+        <p class="label">PROJECT 04</p>
+        <h1 class="project-page__title serif">BRAND / PROJECT NAME</h1>
+        <p class="project-page__meta">Personal Styling</p>
+        <p class="project-page__desc">
+          A short project description. Placeholder text describing the creative direction, styling approach, and visual outcome. Replace with actual project details.
+        </p>
+      </div>
+      <div class="project-page__gallery">
+        <div class="project-page__row project-page__row--full">
+          <div class="project-page__img project-page__img--large">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=2070&auto=format&fit=crop" alt="Project image" />
           </div>
         </div>
-        <div class="work-item work-item--b reveal">
-          <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?q=80&w=1974&auto=format&fit=crop" alt="Editorial Portraits" />
-          <div class="work-item__overlay">
-            <span class="work-item__cat">EDITORIAL PORTRAITS</span>
-            <span class="work-item__title serif">The Portrait Series</span>
-            <span class="work-item__link">VIEW PROJECT →</span>
+        <div class="project-page__row project-page__row--split-reverse">
+          <div class="project-page__img project-page__img--medium">
+            <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=1200&auto=format&fit=crop" alt="Project image" />
+          </div>
+          <div class="project-page__img project-page__img--small">
+            <img src="https://images.unsplash.com/photo-1475721027785-f74eccf877e2?q=80&w=800&auto=format&fit=crop" alt="Project image" />
           </div>
         </div>
-        <div class="work-item work-item--c reveal">
-          <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=2070&auto=format&fit=crop" alt="Fashion Campaign" />
-          <div class="work-item__overlay">
-            <span class="work-item__cat">FASHION CAMPAIGN</span>
-            <span class="work-item__title serif">Monochrome Study</span>
-            <span class="work-item__link">VIEW PROJECT →</span>
+        <div class="project-page__row project-page__row--full">
+          <div class="project-page__img project-page__img--wide">
+            <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=2070&auto=format&fit=crop" alt="Project image" />
           </div>
         </div>
-        <div class="work-item work-item--d reveal">
-          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1974&auto=format&fit=crop" alt="Male Style" />
-          <div class="work-item__overlay">
-            <span class="work-item__cat">MALE STYLE</span>
-            <span class="work-item__title serif">Tailored Presence</span>
-            <span class="work-item__link">VIEW PROJECT →</span>
+        <div class="project-page__row project-page__row--duo">
+          <div class="project-page__img project-page__img--medium">
+            <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=1200&auto=format&fit=crop" alt="Project image" />
           </div>
-        </div>
-        <div class="work-item work-item--e reveal">
-          <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=2070&auto=format&fit=crop" alt="Fashion Event" />
-          <div class="work-item__overlay">
-            <span class="work-item__cat">FASHION EVENT</span>
-            <span class="work-item__title serif">Runway Report</span>
-            <span class="work-item__link">VIEW PROJECT →</span>
-          </div>
-        </div>
-        <div class="work-item work-item--f reveal">
-          <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=2070&auto=format&fit=crop" alt="Personal Styling" />
-          <div class="work-item__overlay">
-            <span class="work-item__cat">PERSONAL STYLING</span>
-            <span class="work-item__title serif">Everyday Icon</span>
-            <span class="work-item__link">VIEW PROJECT →</span>
-          </div>
-        </div>
-        <div class="work-item work-item--g reveal">
-          <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=1974&auto=format&fit=crop" alt="Editorial" />
-          <div class="work-item__overlay">
-            <span class="work-item__cat">EDITORIAL</span>
-            <span class="work-item__title serif">Light & Shadow</span>
-            <span class="work-item__link">VIEW PROJECT →</span>
+          <div class="project-page__img project-page__img--medium">
+            <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?q=80&w=1200&auto=format&fit=crop" alt="Project image" />
           </div>
         </div>
       </div>
+      <div style="margin-top: 3rem;">
+        <button class="project-page__back" onclick="showHome()">← BACK TO WORK</button>
+      </div>
     </div>
-  </section>
+  </div>
 
-  <!-- ========== EDITORIAL FEATURE ========== -->
-  <section class="editorial-feature">
-    <div class="editorial-feature__bg">
-      <img
-        src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?q=80&w=2070&auto=format&fit=crop"
-        alt="Editorial fashion spread"
-      />
-    </div>
-    <div class="editorial-feature__overlay"></div>
-    <div class="editorial-feature__content reveal">
-      <h2 class="editorial-feature__title serif">
-        STYLE IS<br />A FORM OF<br />COMMUNICATION.
-      </h2>
-      <p class="editorial-feature__text">
-        The right look doesn't simply make an impression. It tells people
-        something about who you are before you say a word.
-      </p>
-      <a href="#journal" class="editorial-feature__link">EXPLORE THE JOURNAL →</a>
-    </div>
-  </section>
-
-  <!-- ========== WHO I STYLE ========== -->
-  <section class="who">
+  <!-- Project 5 -->
+  <div id="project-5" class="project-page">
     <div class="container">
-      <div class="who__header reveal">
-        <p class="label">WHO I STYLE</p>
-        <h2 class="serif">CLIENTS</h2>
+      <button class="project-page__back" onclick="showHome()">← BACK TO WORK</button>
+      <div class="project-page__header">
+        <p class="label">PROJECT 05</p>
+        <h1 class="project-page__title serif">BRAND / PROJECT NAME</h1>
+        <p class="project-page__meta">Creative Direction</p>
+        <p class="project-page__desc">
+          A short project description. Placeholder text describing the creative direction, styling approach, and visual outcome. Replace with actual project details.
+        </p>
       </div>
-      <div class="who__grid">
-        <div class="who__item reveal">
-          <div class="who__item-img">
-            <img src="https://images.unsplash.com/photo-1485968579580-b6d095142e6e?q=80&w=1974&auto=format&fit=crop" alt="Individuals" />
+      <div class="project-page__gallery">
+        <div class="project-page__row project-page__row--full">
+          <div class="project-page__img project-page__img--large">
+            <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=2070&auto=format&fit=crop" alt="Project image" />
           </div>
-          <h3 class="who__item-title serif">INDIVIDUALS</h3>
-          <p class="who__item-desc">For people looking to refine their personal style and confidence.</p>
         </div>
-        <div class="who__item reveal">
-          <div class="who__item-img">
-            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1974&auto=format&fit=crop" alt="Professionals" />
+        <div class="project-page__row project-page__row--split">
+          <div class="project-page__img project-page__img--small">
+            <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=800&auto=format&fit=crop" alt="Project image" />
           </div>
-          <h3 class="who__item-title serif">PROFESSIONALS</h3>
-          <p class="who__item-desc">For professionals who want their appearance to match the image they project.</p>
-        </div>
-        <div class="who__item reveal">
-          <div class="who__item-img">
-            <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=2070&auto=format&fit=crop" alt="Creatives" />
+          <div class="project-page__img project-page__img--medium">
+            <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=1200&auto=format&fit=crop" alt="Project image" />
           </div>
-          <h3 class="who__item-title serif">CREATIVES</h3>
-          <p class="who__item-desc">For photographers, creators, artists and production teams who need fashion direction.</p>
         </div>
-        <div class="who__item reveal">
-          <div class="who__item-img">
-            <img src="https://images.unsplash.com/photo-1475721027785-f74eccf877e2?q=80&w=2070&auto=format&fit=crop" alt="Brands & Events" />
+        <div class="project-page__row project-page__row--full">
+          <div class="project-page__img project-page__img--wide">
+            <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?q=80&w=2070&auto=format&fit=crop" alt="Project image" />
           </div>
-          <h3 class="who__item-title serif">BRANDS & EVENTS</h3>
-          <p class="who__item-desc">For campaigns, events, fashion productions and visual projects.</p>
         </div>
+        <div class="project-page__row project-page__row--duo">
+          <div class="project-page__img project-page__img--square">
+            <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?q=80&w=1000&auto=format&fit=crop" alt="Project image" />
+          </div>
+          <div class="project-page__img project-page__img--square">
+            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1000&auto=format&fit=crop" alt="Project image" />
+          </div>
+        </div>
+      </div>
+      <div style="margin-top: 3rem;">
+        <button class="project-page__back" onclick="showHome()">← BACK TO WORK</button>
       </div>
     </div>
-  </section>
-
-  <!-- ========== ABOUT ========== -->
-  <section class="about" id="about">
-    <div class="container">
-      <div class="about__grid">
-        <div class="about__img reveal">
-          <img
-            src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?q=80&w=1974&auto=format&fit=crop"
-            alt="Portrait of the stylist"
-          />
-        </div>
-        <div class="about__content reveal">
-          <p class="label">ABOUT STYLISTLK</p>
-          <h2 class="about__title serif">
-            STYLE, CURATED<br />WITH INTENTION.
-          </h2>
-          <p class="about__text">
-            STYLISTLK is a fashion styling practice built on the belief that
-            how you present yourself is a form of self-expression. Every look
-            is considered — never accidental.
-          </p>
-          <p class="about__text">
-            Working across personal styling, editorial direction and event
-            dressing, the approach is always collaborative, discreet and
-            tailored to the individual.
-          </p>
-          <p class="about__location">Based in Sri Lanka.</p>
-          <a href="#" class="about__link">MORE ABOUT STYLISTLK →</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== FEATURED / COLLABORATIONS ========== -->
-  <section class="features">
-    <div class="container">
-      <div class="features__header reveal">
-        <p class="label">FEATURED / COLLABORATIONS</p>
-        <h2 class="serif">SELECTED FEATURES</h2>
-      </div>
-      <div class="features__list reveal">
-        <span class="features__item">PUBLICATION NAME</span>
-        <span class="features__item">BRAND NAME</span>
-        <span class="features__item">EVENT NAME</span>
-        <span class="features__item">COLLABORATION</span>
-        <span class="features__item">FASHION HOUSE</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== JOURNAL ========== -->
-  <section class="journal" id="journal">
-    <div class="container">
-      <div class="journal__header reveal">
-        <div>
-          <p class="label">FROM THE JOURNAL</p>
-          <h2 class="serif">LATEST NOTES</h2>
-        </div>
-        <a href="#" class="journal__follow">FOLLOW @STYLISTLK →</a>
-      </div>
-      <div class="journal__grid">
-        <div class="journal__item reveal">
-          <div class="journal__item-img">
-            <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=2070&auto=format&fit=crop" alt="Journal" />
-          </div>
-          <p class="journal__item-cat">STYLE NOTES</p>
-          <h3 class="journal__item-title serif">5 Ways to Elevate Your Everyday Look</h3>
-          <p class="journal__item-date">JAN 2026</p>
-        </div>
-        <div class="journal__item reveal">
-          <div class="journal__item-img">
-            <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?q=80&w=2070&auto=format&fit=crop" alt="Journal" />
-          </div>
-          <p class="journal__item-cat">EDITORIAL</p>
-          <h3 class="journal__item-title serif">The Art of Monochrome</h3>
-          <p class="journal__item-date">DEC 2025</p>
-        </div>
-        <div class="journal__item reveal">
-          <div class="journal__item-img">
-            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=2070&auto=format&fit=crop" alt="Journal" />
-          </div>
-          <p class="journal__item-cat">EVENTS</p>
-          <h3 class="journal__item-title serif">Behind the Look</h3>
-          <p class="journal__item-date">NOV 2025</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== TESTIMONIAL ========== -->
-  <section class="testimonial">
-    <div class="container reveal">
-      <blockquote class="testimonial__quote serif">
-        Working with STYLISTLK completely changed the way I approached my wardrobe.
-      </blockquote>
-      <p class="testimonial__author">— CLIENT NAME</p>
-    </div>
-  </section>
-
-  <!-- ========== FINAL CTA ========== -->
-  <section class="final-cta" id="contact">
-    <div class="final-cta__bg">
-      <img
-        src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=2070&auto=format&fit=crop"
-        alt="Editorial background"
-      />
-    </div>
-    <div class="final-cta__overlay"></div>
-    <div class="final-cta__content reveal">
-      <h2 class="final-cta__title serif">
-        READY TO<br />DEFINE YOUR STYLE?
-      </h2>
-      <p class="final-cta__text">
-        Let's create a look that feels unmistakably yours.
-      </p>
-      <div class="final-cta__actions">
-        <a href="#" class="btn btn--solid">BOOK A CONSULTATION →</a>
-        <a href="#" class="btn">CONTACT →</a>
-      </div>
-    </div>
-  </section>
+  </div>
 
   <!-- ========== FOOTER ========== -->
   <footer class="footer">
@@ -1739,7 +2468,7 @@
             <li><a href="#about">About</a></li>
             <li><a href="#services">Services</a></li>
             <li><a href="#work">Work</a></li>
-            <li><a href="#journal">Journal</a></li>
+            <li><a href="#tiktok">From TikTok</a></li>
             <li><a href="#contact">Contact</a></li>
           </ul>
         </div>
@@ -1767,7 +2496,53 @@
 
   <!-- ========== SCRIPTS ========== -->
   <script>
-    // Sticky nav background on scroll
+    /* ============================================================
+       THEME TOGGLE
+       ============================================================ */
+    const root = document.documentElement;
+    const themeToggle = document.getElementById('themeToggle');
+    const mobileThemeLabel = document.getElementById('mobileThemeLabel');
+
+    function getPreferredTheme() {
+      const stored = localStorage.getItem('stylistlk-theme');
+      if (stored) return stored;
+      return window.matchMedia('(prefers-color-scheme: light)').matches
+        ? 'light'
+        : 'dark';
+    }
+
+    function applyTheme(theme) {
+      root.setAttribute('data-theme', theme);
+      localStorage.setItem('stylistlk-theme', theme);
+      if (mobileThemeLabel) {
+        mobileThemeLabel.textContent =
+          theme === 'dark' ? 'LIGHT MODE' : 'DARK MODE';
+      }
+    }
+
+    function toggleTheme() {
+      const current = root.getAttribute('data-theme') || 'dark';
+      const next = current === 'dark' ? 'light' : 'dark';
+      applyTheme(next);
+    }
+
+    // Init theme
+    applyTheme(getPreferredTheme());
+
+    themeToggle.addEventListener('click', toggleTheme);
+
+    // Listen for system changes if no user preference
+    window
+      .matchMedia('(prefers-color-scheme: light)')
+      .addEventListener('change', (e) => {
+        if (!localStorage.getItem('stylistlk-theme')) {
+          applyTheme(e.matches ? 'light' : 'dark');
+        }
+      });
+
+    /* ============================================================
+       STICKY NAV
+       ============================================================ */
     const nav = document.getElementById('nav');
     window.addEventListener('scroll', () => {
       if (window.scrollY > 60) {
@@ -1777,7 +2552,9 @@
       }
     });
 
-    // Mobile menu toggle
+    /* ============================================================
+       MOBILE MENU
+       ============================================================ */
     const hamburger = document.getElementById('hamburger');
     const mobileMenu = document.getElementById('mobileMenu');
 
@@ -1795,7 +2572,9 @@
       document.body.style.overflow = '';
     }
 
-    // Scroll reveal via IntersectionObserver
+    /* ============================================================
+       SCROLL REVEAL
+       ============================================================ */
     const revealElements = document.querySelectorAll('.reveal');
     const revealObserver = new IntersectionObserver(
       (entries) => {
@@ -1811,7 +2590,9 @@
 
     revealElements.forEach((el) => revealObserver.observe(el));
 
-    // Subtle parallax on hero image (optional, very light)
+    /* ============================================================
+       HERO PARALLAX
+       ============================================================ */
     const heroImg = document.querySelector('.hero__bg img');
     if (heroImg) {
       window.addEventListener('scroll', () => {
@@ -1821,6 +2602,63 @@
         }
       });
     }
+
+    /* ============================================================
+       PROJECT PAGE NAVIGATION
+       ============================================================ */
+    const homepage = document.getElementById('homepage');
+    const projectPages = document.querySelectorAll('.project-page');
+    const navEl = document.getElementById('nav');
+
+    function openProject(e, projectId) {
+      e.preventDefault();
+      homepage.style.display = 'none';
+      projectPages.forEach((p) => p.classList.remove('active'));
+      const target = document.getElementById(projectId);
+      if (target) {
+        target.classList.add('active');
+      }
+      window.scrollTo({ top: 0, behavior: 'instant' });
+      navEl.style.position = 'fixed';
+      navEl.style.background = 'var(--nav-solid)';
+      navEl.style.backdropFilter = 'blur(14px)';
+      navEl.style.borderBottom = '1px solid var(--border-soft)';
+      closeMenu();
+    }
+
+    function showHome() {
+      homepage.style.display = 'block';
+      projectPages.forEach((p) => p.classList.remove('active'));
+      navEl.style.background = '';
+      navEl.style.backdropFilter = '';
+      navEl.style.borderBottom = '';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      setTimeout(() => {
+        document.querySelectorAll('.reveal').forEach((el) => {
+          el.classList.remove('visible');
+          revealObserver.observe(el);
+        });
+      }, 100);
+    }
+
+    // Handle hash links within project pages
+    document.querySelectorAll('a[href^="#"]').forEach((link) => {
+      link.addEventListener('click', function (e) {
+        const href = this.getAttribute('href');
+        if (href === '#') return;
+        const activeProject = document.querySelector('.project-page.active');
+        if (activeProject && href !== '#') {
+          const targetId = href.substring(1);
+          const targetEl = document.getElementById(targetId);
+          if (targetEl && !activeProject.contains(targetEl)) {
+            showHome();
+            setTimeout(() => {
+              targetEl.scrollIntoView({ behavior: 'smooth' });
+            }, 200);
+          }
+        }
+      });
+    });
   </script>
 </body>
 </html>
