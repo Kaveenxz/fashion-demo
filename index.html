@@ -12,7 +12,7 @@
   />
   <style>
     /* ============================================================
-       THEME TOKENS
+       THEME TOKENS — DARK ONLY
        ============================================================ */
     :root,
     [data-theme="dark"] {
@@ -42,35 +42,6 @@
       );
       --img-brightness: 0.7;
       --card-shadow: none;
-    }
-
-    [data-theme="light"] {
-      --bg: #f7f5f1;
-      --bg-elevated: #ffffff;
-      --text-primary: #1a1815;
-      --text-secondary: rgba(26, 24, 21, 0.68);
-      --text-tertiary: rgba(26, 24, 21, 0.45);
-      --text-faint: rgba(26, 24, 21, 0.25);
-      --accent: #9a7b4a;
-      --accent-faint: rgba(154, 123, 74, 0.35);
-      --border: rgba(26, 24, 21, 0.1);
-      --border-soft: rgba(26, 24, 21, 0.07);
-      --hover-bg: rgba(26, 24, 21, 0.03);
-      --nav-bg: rgba(247, 245, 241, 0.85);
-      --nav-solid: rgba(247, 245, 241, 0.95);
-      --btn-border: rgba(26, 24, 21, 0.35);
-      --btn-solid-bg: #1a1815;
-      --btn-solid-text: #f7f5f1;
-      --scrollbar-track: #f7f5f1;
-      --scrollbar-thumb: #d8d3c9;
-      --overlay-gradient: linear-gradient(
-        to right,
-        rgba(247, 245, 241, 0.8) 0%,
-        rgba(247, 245, 241, 0.35) 50%,
-        rgba(247, 245, 241, 0.65) 100%
-      );
-      --img-brightness: 0.95;
-      --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
     }
 
     /* ---------- RESET & BASE ---------- */
@@ -233,56 +204,8 @@
       border-color: var(--btn-solid-bg);
     }
 
-    /* ---------- THEME TOGGLE ---------- */
-    .theme-toggle {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      border: 1px solid var(--border);
-      background: transparent;
-      cursor: pointer;
-      color: var(--text-primary);
-      transition: background 0.3s ease, border-color 0.3s ease,
-        transform 0.3s ease;
-      flex-shrink: 0;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .theme-toggle:hover {
-      background: var(--hover-bg);
-      border-color: var(--accent-faint);
-    }
-
-    .theme-toggle svg {
-      width: 16px;
-      height: 16px;
-      position: absolute;
-      transition: opacity 0.4s ease, transform 0.4s ease;
-    }
-
-    .theme-toggle .icon-sun {
-      opacity: 0;
-      transform: rotate(-90deg) scale(0.6);
-    }
-
-    .theme-toggle .icon-moon {
-      opacity: 1;
-      transform: rotate(0deg) scale(1);
-    }
-
-    [data-theme="light"] .theme-toggle .icon-sun {
-      opacity: 1;
-      transform: rotate(0deg) scale(1);
-    }
-
-    [data-theme="light"] .theme-toggle .icon-moon {
-      opacity: 0;
-      transform: rotate(90deg) scale(0.6);
-    }
+    /* ---------- THEME TOGGLE (REMOVED) ---------- */
+    /* The theme toggle is no longer needed since only dark mode is kept. */
 
     .nav__hamburger {
       display: none;
@@ -596,7 +519,7 @@
     }
 
     /* ============================================================
-       SERVICES — EDITORIAL CARDS LAYOUT (different from Work list)
+       SERVICES — EDITORIAL CARDS LAYOUT
        ============================================================ */
     .services {
       background: var(--bg);
@@ -618,7 +541,6 @@
       color: var(--text-primary);
     }
 
-    /* Two-column editorial card grid — visually distinct from work list */
     .services__grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -702,7 +624,6 @@
       max-width: 360px;
     }
 
-    /* Make the last card span full width on 2-col grid for editorial balance */
     .service-card--wide {
       grid-column: 1 / -1;
       min-height: 180px;
@@ -813,7 +734,7 @@
     }
 
     /* ============================================================
-       SELECTED WORK (typography-led list — distinct from Services cards)
+       SELECTED WORK
        ============================================================ */
     .work {
       background: var(--bg);
@@ -1023,15 +944,6 @@
       z-index: 2;
     }
 
-    [data-theme="light"] .editorial-feature__overlay {
-      background: linear-gradient(
-        to right,
-        rgba(247, 245, 241, 0.9) 0%,
-        rgba(247, 245, 241, 0.4) 60%,
-        rgba(247, 245, 241, 0.7) 100%
-      );
-    }
-
     .editorial-feature__content {
       position: relative;
       z-index: 3;
@@ -1042,25 +954,17 @@
     .editorial-feature__title {
       font-size: clamp(1.8rem, 4vw, 3.2rem);
       line-height: 1.12;
-      color: var(--text-primary);
+      color: #f5f3ef;
       margin-bottom: 1.2rem;
       letter-spacing: -0.015em;
-    }
-
-    [data-theme="dark"] .editorial-feature__title {
-      color: #f5f3ef;
     }
 
     .editorial-feature__text {
       font-size: 0.88rem;
       line-height: 1.8;
-      color: var(--text-secondary);
+      color: rgba(245, 243, 239, 0.65);
       max-width: 380px;
       margin-bottom: 1.6rem;
-    }
-
-    [data-theme="dark"] .editorial-feature__text {
-      color: rgba(245, 243, 239, 0.65);
     }
 
     .editorial-feature__link {
@@ -1101,10 +1005,6 @@
     .about__img img {
       filter: brightness(0.9) contrast(1.05);
       transition: filter 0.5s ease;
-    }
-
-    [data-theme="light"] .about__img img {
-      filter: brightness(1) contrast(1.02);
     }
 
     .about__content .label {
@@ -1386,19 +1286,11 @@
       filter: brightness(0.35) contrast(1.1);
     }
 
-    [data-theme="light"] .final-cta__bg img {
-      filter: brightness(0.7) contrast(1.05);
-    }
-
     .final-cta__overlay {
       position: absolute;
       inset: 0;
       background: rgba(10, 10, 10, 0.6);
       z-index: 2;
-    }
-
-    [data-theme="light"] .final-cta__overlay {
-      background: rgba(247, 245, 241, 0.55);
     }
 
     .final-cta__content {
@@ -1411,24 +1303,16 @@
     .final-cta__title {
       font-size: clamp(1.8rem, 4vw, 3rem);
       line-height: 1.12;
-      color: var(--text-primary);
+      color: #f5f3ef;
       margin-bottom: 1.2rem;
       letter-spacing: -0.015em;
-    }
-
-    [data-theme="dark"] .final-cta__title {
-      color: #f5f3ef;
     }
 
     .final-cta__text {
       font-size: 0.88rem;
       line-height: 1.8;
-      color: var(--text-secondary);
-      margin-bottom: 2rem;
-    }
-
-    [data-theme="dark"] .final-cta__text {
       color: rgba(245, 243, 239, 0.65);
+      margin-bottom: 2rem;
     }
 
     .final-cta__actions {
@@ -1436,22 +1320,6 @@
       gap: 0.8rem;
       justify-content: center;
       flex-wrap: wrap;
-    }
-
-    [data-theme="light"] .final-cta .btn {
-      border-color: rgba(26, 24, 21, 0.4);
-      color: var(--text-primary);
-    }
-
-    [data-theme="light"] .final-cta .btn--solid {
-      background: #1a1815;
-      color: #f7f5f1;
-      border-color: #1a1815;
-    }
-
-    [data-theme="light"] .final-cta .btn--solid:hover {
-      background: transparent;
-      color: var(--text-primary);
     }
 
     /* ============================================================
@@ -1757,14 +1625,6 @@
       .mobile-menu {
         display: flex;
       }
-      .theme-toggle {
-        width: 34px;
-        height: 34px;
-      }
-      .theme-toggle svg {
-        width: 14px;
-        height: 14px;
-      }
       .nav__actions {
         gap: 0.6rem;
       }
@@ -1774,28 +1634,6 @@
       .mobile-menu {
         display: none !important;
       }
-    }
-
-    /* Mobile theme toggle inside mobile menu */
-    .mobile-menu__theme {
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-      font-size: 0.7rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--text-primary);
-      margin-top: 1rem;
-      cursor: pointer;
-      background: none;
-      border: 1px solid var(--border);
-      padding: 0.7rem 1.4rem;
-      font-family: 'Inter', sans-serif;
-      transition: border-color 0.3s ease;
-    }
-
-    .mobile-menu__theme:hover {
-      border-color: var(--accent-faint);
     }
   </style>
 </head>
@@ -1813,17 +1651,6 @@
         <a href="#tiktok">FROM TIKTOK</a>
       </div>
       <div class="nav__actions">
-        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
-          <!-- Moon icon (shown in dark mode) -->
-          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-          </svg>
-          <!-- Sun icon (shown in light mode) -->
-          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="4"/>
-            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
-          </svg>
-        </button>
         <a href="#contact" class="nav__cta">BOOK A CONSULTATION</a>
         <button class="nav__hamburger" id="hamburger" aria-label="Menu">
           <span></span><span></span><span></span>
@@ -1840,9 +1667,6 @@
     <a href="#work" onclick="closeMenu()">WORK</a>
     <a href="#tiktok" onclick="closeMenu()">FROM TIKTOK</a>
     <a href="#contact" class="nav__cta" onclick="closeMenu()">BOOK A CONSULTATION</a>
-    <button class="mobile-menu__theme" onclick="toggleTheme()">
-      <span id="mobileThemeLabel">LIGHT MODE</span>
-    </button>
   </div>
 
   <!-- ========== HOMEPAGE ========== -->
@@ -2497,48 +2321,8 @@
   <!-- ========== SCRIPTS ========== -->
   <script>
     /* ============================================================
-       THEME TOGGLE
+       THEME — DARK ONLY (no toggle, no localStorage)
        ============================================================ */
-    const root = document.documentElement;
-    const themeToggle = document.getElementById('themeToggle');
-    const mobileThemeLabel = document.getElementById('mobileThemeLabel');
-
-    function getPreferredTheme() {
-      const stored = localStorage.getItem('stylistlk-theme');
-      if (stored) return stored;
-      return window.matchMedia('(prefers-color-scheme: light)').matches
-        ? 'light'
-        : 'dark';
-    }
-
-    function applyTheme(theme) {
-      root.setAttribute('data-theme', theme);
-      localStorage.setItem('stylistlk-theme', theme);
-      if (mobileThemeLabel) {
-        mobileThemeLabel.textContent =
-          theme === 'dark' ? 'LIGHT MODE' : 'DARK MODE';
-      }
-    }
-
-    function toggleTheme() {
-      const current = root.getAttribute('data-theme') || 'dark';
-      const next = current === 'dark' ? 'light' : 'dark';
-      applyTheme(next);
-    }
-
-    // Init theme
-    applyTheme(getPreferredTheme());
-
-    themeToggle.addEventListener('click', toggleTheme);
-
-    // Listen for system changes if no user preference
-    window
-      .matchMedia('(prefers-color-scheme: light)')
-      .addEventListener('change', (e) => {
-        if (!localStorage.getItem('stylistlk-theme')) {
-          applyTheme(e.matches ? 'light' : 'dark');
-        }
-      });
 
     /* ============================================================
        STICKY NAV
